@@ -12,16 +12,12 @@ import SignUpOrg from "./pages/profile/SignUpOrg";
 import Admin from "./pages/Admin";
 import LoginAdmin from "./pages/profile/LoginAdmin";
 import { Route, Routes } from "react-router-dom";
-import firebaseTest from "./firebaseTest";
-//import designingImage from './public/assets/Jobs/designing.jpg';
 
- 
 function App() {
   return (
     <div className="App">
       <Header />
       <Routes>
-        
         <Route path="/" element={<Home />} />
         <Route path="/StdProfileInternal" element={<StdProfileInternal />} />
         <Route path="/OrgProfileInternal" element={<OrgProfileInternal />} />
@@ -37,8 +33,6 @@ function App() {
         <Route path="/admin" element={<Admin />} />
         <Route path="/adminlogin" element={<LoginAdmin />} /> 
       </Routes>
-      Test
-      <firebaseTest/>
     </div>
   );
 }
