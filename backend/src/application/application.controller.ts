@@ -13,12 +13,12 @@ export class ApplicationController {
     }
 
     @Get('all/:id')
-    getAllApplicationsOfPost(@Param('id') id:string){
+    getAllApplicationsByPostId(@Param('id') id:string){
         return this.applicationService.findAllApplicationByPostId(id)
     }
 
     @Get('all/user/:id')
-    getAllApplicationsOfUser(@Param('id') id:string){
+    getAllApplicationsByUserId(@Param('id') id:string){
         return this.applicationService.findAllApplicationByUserId(id)
     }
 
