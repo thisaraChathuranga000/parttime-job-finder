@@ -1,8 +1,6 @@
-import { Body, Controller, Get, HttpException, Param, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { CreatePostDto } from './dto/CreatePost.dto';
-import mongoose from 'mongoose';
-import { JobPost } from 'src/schemas/Post.schema';
 
 @Controller('posts')
 export class PostsController {

@@ -22,7 +22,7 @@ export class InvitationsService {
             const invitation = await this.invitationModel.find({ senderUserId: id}).exec();
             return invitation;
         } catch (error) {
-            throw new Error('Failt to retriew Posts');
+            throw new Error('Failt to retriew Invitations');
         }
     }
 
@@ -31,7 +31,7 @@ export class InvitationsService {
             const invitation = await this.invitationModel.find({ reciverUserId: id}).exec();
             return invitation;
         } catch (error) {
-            throw new Error('Failed to retriew Posts');
+            throw new Error('Failed to retriew Invitations');
         }
     }
 

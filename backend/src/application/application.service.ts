@@ -21,7 +21,7 @@ export class ApplicationService {
             const application = await this.applicationModel.find({ postId: id}).exec();
             return application;
         } catch (error) {
-            throw new Error('Failt to retriew Posts');
+            throw new Error('Failed to retriew Applications');
         }
     }
 
@@ -30,14 +30,14 @@ export class ApplicationService {
             const application = await this.applicationModel.find({ userId: id}).exec();
             return application;
         } catch (error) {
-            throw new Error('Failt to retriew Posts');
+            throw new Error('Failed to retriew Applications');
         }
     }
 
     async findOneApplication(id:string){
         const application = await this.applicationModel.findById(id).exec();
         if(!application){
-            throw new NotFoundException("Post Not found");
+            throw new NotFoundException("Application Not found");
         }
         return application;
     }
@@ -45,7 +45,7 @@ export class ApplicationService {
     async deletePost(id:string){
         const deletedApplication = await this.applicationModel.findByIdAndDelete(id).exec();
         if(!deletedApplication){
-            throw new NotFoundException("Post not found")
+            throw new NotFoundException("Application not found")
         }
         return "Deleted"
     }

@@ -2,7 +2,6 @@ import { Body, Controller, Get, HttpException, Param, Post, UsePipes, Validation
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/CreateUser.dto';
 import mongoose from 'mongoose';
-import { User } from 'src/schemas/User.schema';
 
 @Controller('users')
 export class UsersController {
