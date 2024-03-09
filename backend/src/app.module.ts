@@ -3,11 +3,13 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from './users/users.module';
+import { PostsModule } from './posts/posts.module';
+import { ApplicationModule } from './application/application.module';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
 @Module({
-  imports: [UsersModule, MongooseModule.forRoot(process.env.MONGO_URL)],
+  imports: [UsersModule, MongooseModule.forRoot(process.env.MONGO_URL), PostsModule, ApplicationModule],
   controllers: [AppController],
   providers: [AppService],
 })
