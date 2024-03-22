@@ -41,12 +41,16 @@ export class ApplicationService {
         }
         return application;
     }
-
-    async deletePost(id:string){
-        const deletedApplication = await this.applicationModel.findByIdAndDelete(id).exec();
-        if(!deletedApplication){
-            throw new NotFoundException("Application not found")
+    
+    async deleteApplication(id: string){
+        try{
+            const deletedApplication = await this.applicationModel.findByIdAndDelete(id);
+            if(!deletedApplication){
+                throw new Error("Post Not found")
+            }
+            return deletedApplication;
+        } catch (error){
+            throw new Error("Unable to delete Application")
         }
-        return "Deleted"
     }
 }

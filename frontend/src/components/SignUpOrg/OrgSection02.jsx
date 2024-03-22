@@ -20,9 +20,6 @@ function OrgSection02() {
       <TextField label="Contact" variant="outlined" fullWidth margin="normal" />
       <TextField label="Address" variant="outlined" fullWidth margin="normal" />
       <div>
-        <Typography variant="h6" gutterBottom>
-          Upload Your Organizations Logo
-        </Typography>
         <Typography variant="subtitle2" gutterBottom sx={{ color: "gray" }}>
           Upload Your Organizations Logo
         </Typography>

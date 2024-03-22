@@ -91,8 +91,7 @@ function FullPost({ post }) {
               variant="subtitle1"
               color="text.secondary"
               component="div"
-              marginBottom={-1}
-               
+              marginBottom={-1}               
               align="left"
             >
               Payment: {payment} LKR

@@ -3,10 +3,10 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { JobPost } from 'src/schemas/Post.schema';
 import { CreatePostDto } from './dto/CreatePost.dto';
+import { UpdatePostDto } from './dto/UpdatePost.dto';
 
 @Injectable()
 export class PostsService {
-
     constructor(
         @InjectModel(JobPost.name) 
         private readonly postModel: Model<JobPost>
@@ -34,11 +34,23 @@ export class PostsService {
         return post;
     }
 
-    async deletePost(id:string){
-        const deletedPost = await this.postModel.findByIdAndDelete(id).exec();
-        if(!deletedPost){
-            throw new NotFoundException("Post not found")
+    async updatePost(id: string, updatePostDto: UpdatePostDto) {
+        const post = await this.postModel.findById(id);
+        if (!post) {
+            throw new NotFoundException('Post not found');
         }
-        return "Deleted"
+        return this.postModel.findByIdAndUpdate(id, updatePostDto, { new: true });
+    }
+
+    async deletePost(id: string){
+        try{
+            const deletedPost = await this.postModel.findByIdAndDelete(id);
+            if(!deletedPost){
+                throw new Error("Post Not found")
+            }
+            return deletedPost;
+        } catch (error){
+            throw new Error("Unable to delete Post")
+        }
     }
 }

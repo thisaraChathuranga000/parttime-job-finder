@@ -1,6 +1,7 @@
-import { Body, Controller, Get, Param, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UsePipes, ValidationPipe } from '@nestjs/common';
 import { InvitationsService } from './invitations.service';
 import { CreateInvitationDto } from './dto/createInvitation.dto';
+import { UpdateInvitationDto } from './dto/UpdateInvitation.dto';
 
 @Controller('invitations')
 export class InvitationsController {
@@ -25,5 +26,15 @@ export class InvitationsController {
     @Get(':id')
     async getOneInvitation(@Param('id') id: string){
         return this.invitationService.findOneInvitation(id)
+    }
+
+    @Put(':id')
+    async updateInvitationById(@Param('id') id: string, @Body() updateInvitationDto: UpdateInvitationDto) {
+        return this.invitationService.updateInvitation(id, updateInvitationDto);
+    }
+
+    @Delete(':id')
+    async deleteUserById(@Param('id') id:string){
+      return await this.invitationService.deleteInvitation(id);
     }
 }

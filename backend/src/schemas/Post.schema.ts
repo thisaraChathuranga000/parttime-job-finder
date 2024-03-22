@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 @Schema({ timestamps: true })
 export class JobPost{
-    @Prop()
+    @Prop({required: true})
     userId: string;
 
     @Prop({required: true})

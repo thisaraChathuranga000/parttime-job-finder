@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ApplicationService } from './application.service';
 import { CreateApplicationDto } from './dto/CreateApplication.dto';
 
@@ -25,5 +25,10 @@ export class ApplicationController {
     @Get(':id')
     async getOneApplication(@Param('id') id: string){
         return this.applicationService.findOneApplication(id)
+    }
+
+    @Delete(':id')
+    async deleteApplicationById(@Param('id') id:string){
+      return await this.applicationService.deleteApplication(id);
     }
 }

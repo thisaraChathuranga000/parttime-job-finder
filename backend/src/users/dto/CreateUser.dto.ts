@@ -16,18 +16,31 @@ export class CreateUserTypeDto {
 
 export class CreateUserDto {
     @IsNotEmpty()
-    @IsString()
-    userName: string;
+    email: string;
 
     @IsNotEmpty()
-    @IsString()
     password: string;
 
     @IsNotEmpty()
-    @IsString()
+    name: string;
+
+    @IsNotEmpty()
+    contact: string;
+
+    @IsNotEmpty()
+    address: string;
+
+    @IsNotEmpty()
     imgUrl: string;
+
+    uni_name: string;
+    res_address: string;
+    gender: string;
+    birthday: string;
+    age: number;
 
     @ValidateNested()
     @Type(() => CreateUserTypeDto)
     type: CreateUserTypeDto;
+
 }
