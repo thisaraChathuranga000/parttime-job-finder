@@ -18,12 +18,12 @@ function App() {
     <div className="App">
       
       <Header />
-      <h1>text</h1>
+      {/* <h1>text</h1>
       <img
         src={"http://localhost:5000/users/uploads/eed9590dfe1b06690d2c4c2cbb4d0c2a"}
         alt='jjj'
         style={{ width: "400px" }}
-      />
+      /> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/StdProfileInternal" element={<StdProfileInternal />} />

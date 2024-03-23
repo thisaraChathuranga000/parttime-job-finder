@@ -15,9 +15,7 @@ function SignUpStudent() {
             boxShadow: "none",
           }}
         >
-
           <SignUpBox />
-
           <CardMedia
             component="img"
             sx={{ width: "500px", pl: "5%" }}
@@ -25,10 +23,7 @@ function SignUpStudent() {
             alt="Sign Up"
           />
         </Card>
-
         <Footer/>
-
-         
       </div>
     </div>
   );
