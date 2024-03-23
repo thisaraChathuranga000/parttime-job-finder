@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import { useState } from "react";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
@@ -11,26 +10,54 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
+import axios from "axios";
 
 function SignUpBox() {
   const [step, setStep] = useState(1);
-  const [selectedImage, setSelectedImage] = useState(null)
- 
-  const nextStep = () => {
-    setStep(prevStep => prevStep + 1);
-  };
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    name: "",
+    contact: "",
+    address: "",
+    uni_name: "",
+    res_address: "",
+    gender: "",
+    birthday: "",
+    age: 0,
+  });
+
+  const nextStep = () => setStep(prevStep => prevStep + 1);
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
-    if (file) {
-      setSelectedImage(file);
-    }
+    if (file) {setSelectedImage(file)}
   };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(formData);
+    const formDataToSend = new FormData();
+    for (const key in formData) {formDataToSend.append(key, formData[key])}
+    if (selectedImage) {formDataToSend.append("file", selectedImage)}
+
+    axios.post("http://localhost:5000/users/student", formDataToSend)
+    .then((response) => console.log(response.data))
+    .catch((error) => console.error(error))
+  };
+
+  
 
   return (
     <div>
-      <Box sx={{display: "flex",flexDirection: "column",pt: 5,pl: 28,marginBottom: 4,}}>
-        <Card variant="outlined" sx={{boxShadow: "0 4px 8px #4A4A4A",border: "1px solid #0069c4",width: "400px",pb: 4,}}>
+      <Box sx={{ display: "flex", flexDirection: "column", pt: 5, pl: 28, marginBottom: 4 }}>
+        <Card variant="outlined" sx={{ boxShadow: "0 4px 8px #4A4A4A", border: "1px solid #0069c4", width: "400px", pb: 4 }}>
           <CardContent sx={{ width: "340px", pl: 3.5 }}>
             {step === 1 ? (
               <div>
@@ -43,6 +70,8 @@ function SignUpBox() {
                   variant="outlined"
                   fullWidth
                   margin="normal"
+                  name="email"
+                  onChange={handleInputChange}
                 />
 
                 <TextField
@@ -51,6 +80,8 @@ function SignUpBox() {
                   variant="outlined"
                   fullWidth
                   margin="normal"
+                  name="password"
+                  onChange={handleInputChange}
                 />
                 <Button type="submit" variant="contained" color="primary" fullWidth onClick={nextStep}>
                   Next
@@ -68,6 +99,8 @@ function SignUpBox() {
                   variant="outlined"
                   fullWidth
                   margin="normal"
+                  name="name"
+                  onChange={handleInputChange}
                 />
 
                 <FormControl fullWidth>
@@ -76,17 +109,22 @@ function SignUpBox() {
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     label="Gender"
+                    value={formData.gender}
+                    onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
                   >
-                    <MenuItem value={10}>Male</MenuItem>
-                    <MenuItem value={20}>Female</MenuItem>
+                    <MenuItem value="Male">Male</MenuItem>
+                    <MenuItem value="Female">Female</MenuItem>
                   </Select>
                 </FormControl>
 
                 <TextField
+                  type="number"
                   label="Age"
                   variant="outlined"
                   fullWidth
                   margin="normal"
+                  name="age"
+                  onChange={handleInputChange}
                 />
 
                 <TextField
@@ -96,6 +134,8 @@ function SignUpBox() {
                   id="start-date"
                   helperText="Birthday"
                   type="date"
+                  name="birthday"
+                  onChange={handleInputChange}
                 />
 
                 <TextField
@@ -103,6 +143,8 @@ function SignUpBox() {
                   variant="outlined"
                   fullWidth
                   margin="normal"
+                  name="contact"
+                  onChange={handleInputChange}
                 />
 
                 <TextField
@@ -110,6 +152,8 @@ function SignUpBox() {
                   variant="outlined"
                   fullWidth
                   margin="normal"
+                  name="uni_name"
+                  onChange={handleInputChange}
                 />
 
                 <TextField
@@ -117,6 +161,8 @@ function SignUpBox() {
                   variant="outlined"
                   fullWidth
                   margin="normal"
+                  name="address"
+                  onChange={handleInputChange}
                 />
 
                 <TextField
@@ -124,6 +170,8 @@ function SignUpBox() {
                   variant="outlined"
                   fullWidth
                   margin="normal"
+                  name="res_address"
+                  onChange={handleInputChange}
                 />
 
                 <Button 
@@ -152,10 +200,11 @@ function SignUpBox() {
                   type="file"
                   inputProps={{ accept: "image/*" }}
                   onChange={handleImageChange}
+                  name="file"
                   variant="outlined"
                 />
 
-                <Button type="submit" variant="contained" color="primary" fullWidth>
+                <Button type="submit" variant="contained" color="primary" fullWidth onClick={handleSubmit}>
                   Submit
                 </Button>
               </div>
@@ -168,3 +217,4 @@ function SignUpBox() {
 }
 
 export default SignUpBox;
+

@@ -9,14 +9,27 @@ import { FileInterceptor } from '@nestjs/platform-express';
 export class UsersController {
     constructor(private readonly usersService:UsersService) {}
 
-    @Post()
+    @Post('student')
     @UsePipes(new ValidationPipe())
     @UseInterceptors(FileInterceptor('file'))
-    createUser(@Body() createUserDto: CreateUserDto, @UploadedFile() file) {
+    createStudentUser(@Body() createUserDto: CreateUserDto, @UploadedFile() file) {
         console.log(createUserDto)
         if (file) {
           createUserDto.imgUrl = file.filename;
         }
+        createUserDto.type = {isStudent:true, isOrg:false}
+        return this.usersService.createUser(createUserDto)
+    }
+
+    @Post('org')
+    @UsePipes(new ValidationPipe())
+    @UseInterceptors(FileInterceptor('file'))
+    createOrgUser(@Body() createUserDto: CreateUserDto, @UploadedFile() file) {
+        console.log(createUserDto)
+        if (file) {
+          createUserDto.imgUrl = file.filename;
+        }
+        createUserDto.type = {isStudent:false, isOrg:true}
         return this.usersService.createUser(createUserDto)
     }
 
