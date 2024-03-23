@@ -14,6 +14,7 @@ import Select from "@mui/material/Select";
 
 function SignUpBox() {
   const [step, setStep] = useState(1);
+  const [selectedImage, setSelectedImage] = useState(null)
  
   const nextStep = () => {
     setStep(prevStep => prevStep + 1);
