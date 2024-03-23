@@ -22,6 +22,7 @@ export class UsersService {
         });
         return newUser.save();
     }
+    
 
     getsUsers() {
         return this.userModel.find().populate(['type']);
@@ -55,5 +56,4 @@ export class UsersService {
             throw new Error("Unable to delete User")
         }
     }
-    
 }

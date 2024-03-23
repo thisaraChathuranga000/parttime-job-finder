@@ -9,5 +9,14 @@ export class CreatePostDto{
     title: string;
 
     @IsNotEmpty()
-    decription: string;
+    description: string;
+
+    img: string;
+    location: string;
+    start_data: string;
+    end_data: string;
+    start_time: string;
+    end_time: string;
+    payment: string;
+    city: string;
 }

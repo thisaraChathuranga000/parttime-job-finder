@@ -1,8 +1,9 @@
-import { Body, Controller, Delete, Get, HttpException, Param, Post, Put, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpException, Param, Post, Put, Res, UploadedFile, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/CreateUser.dto';
 import mongoose from 'mongoose';
 import { UpdateUserDto } from './dto/UpdateUser.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('users')
 export class UsersController {
@@ -10,14 +11,23 @@ export class UsersController {
 
     @Post()
     @UsePipes(new ValidationPipe())
-    createUser(@Body() createUserDto: CreateUserDto) {
+    @UseInterceptors(FileInterceptor('file'))
+    createUser(@Body() createUserDto: CreateUserDto, @UploadedFile() file) {
         console.log(createUserDto)
+        if (file) {
+          createUserDto.imgUrl = file.filename;
+        }
         return this.usersService.createUser(createUserDto)
     }
 
     @Get()
     getUsers() {
       return this.usersService.getsUsers();
+    }
+
+    @Get('uploads/:imgpath')
+    seeUploadedFile(@Param('imgpath') image, @Res() res){
+      return res.sendFile(image, {root: 'uploads/users'});
     }
 
     @Get(':id')

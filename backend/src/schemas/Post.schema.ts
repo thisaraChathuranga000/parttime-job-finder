@@ -8,8 +8,32 @@ export class JobPost{
     @Prop({required: true})
     title: string;
 
-    @Prop({required: true})
-    decription: string;
+    @Prop()
+    description: string;
+
+    @Prop()
+    img: string;
+
+    @Prop()
+    location: string;
+
+    @Prop()
+    start_data: string;
+
+    @Prop()
+    end_data: string;
+
+    @Prop()
+    start_time: string;
+
+    @Prop()
+    end_time: string;
+
+    @Prop()
+    payment: string;
+
+    @Prop()
+    city: string;
 }
 
 export const JobPostSchema = SchemaFactory.createForClass(JobPost);

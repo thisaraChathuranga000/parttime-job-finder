@@ -13,6 +13,8 @@ import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import { Link } from "react-router-dom";
 
+import { useEffect, useState } from "react";
+
 
 const style = {
   position: "absolute",

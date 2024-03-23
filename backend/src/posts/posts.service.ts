@@ -4,12 +4,15 @@ import { Model } from 'mongoose';
 import { JobPost } from 'src/schemas/Post.schema';
 import { CreatePostDto } from './dto/CreatePost.dto';
 import { UpdatePostDto } from './dto/UpdatePost.dto';
+import { User } from 'src/schemas/User.schema';
 
 @Injectable()
 export class PostsService {
     constructor(
         @InjectModel(JobPost.name) 
-        private readonly postModel: Model<JobPost>
+        private readonly postModel: Model<JobPost>,
+        @InjectModel(User.name) 
+        private userModel: Model<User>, 
     ) {}
 
     async createPost(createPostDto: CreatePostDto[]) {
@@ -17,17 +20,32 @@ export class PostsService {
         return newPost.save();
     }
 
-    async findAllPosts(id:string) {
-        try{
-            const posts = await this.postModel.find({ userId: id}).exec();
+    async findAllPosts(id: string) {
+        try {
+            const posts = await this.postModel
+                .find({ userId: id })
+                .populate({
+                    path: 'userId',
+                    model: this.userModel,
+                    select: 'name'
+                })
+                .exec();
             return posts;
         } catch (error) {
-            throw new Error('Failt to retriew Posts');
+            throw new Error('Failed to retrieve Posts');
         }
     }
 
+
     async findOnePost(id:string){
-        const post = await this.postModel.findById(id).exec();
+        const post = await this.postModel
+            .findById(id)
+            .populate({
+                path: 'userId',
+                model: this.userModel, 
+                select: 'name'
+            })
+            .exec();
         if(!post){
             throw new NotFoundException("Post Not found");
         }

@@ -5,6 +5,7 @@ import {
     IsString,
     ValidateNested,
   } from 'class-validator';
+import { Express } from 'express';
   
 export class CreateUserTypeDto {
     @IsBoolean()
@@ -30,8 +31,7 @@ export class CreateUserDto {
     @IsNotEmpty()
     address: string;
 
-    @IsNotEmpty()
-    imgUrl: string;
+    imgUrl: string; 
 
     uni_name: string;
     res_address: string;

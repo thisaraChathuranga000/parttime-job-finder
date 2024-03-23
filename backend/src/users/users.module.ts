@@ -4,6 +4,7 @@ import { User, UserSchema } from 'src/schemas/User.schema';
 import { UserType, UserTypeSchema } from 'src/schemas/UserType.schema';
 import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
     imports:[MongooseModule.forFeature([
@@ -15,7 +16,8 @@ import { UsersController } from './users.controller';
             name: UserType.name,
             schema: UserTypeSchema,
         },
-    ])],
+    ]),
+    MulterModule.register({dest: './uploads/users',})],
     providers: [UsersService],
     controllers: [UsersController]
 })
