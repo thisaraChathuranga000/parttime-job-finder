@@ -14,9 +14,7 @@ export class UsersController {
     @UseInterceptors(FileInterceptor('file'))
     createStudentUser(@Body() createUserDto: CreateUserDto, @UploadedFile() file) {
         console.log(createUserDto)
-        if (file) {
-          createUserDto.imgUrl = file.filename;
-        }
+        if (file) {createUserDto.imgUrl = file.filename}
         createUserDto.type = {isStudent:true, isOrg:false}
         return this.usersService.createUser(createUserDto)
     }
@@ -26,9 +24,7 @@ export class UsersController {
     @UseInterceptors(FileInterceptor('file'))
     createOrgUser(@Body() createUserDto: CreateUserDto, @UploadedFile() file) {
         console.log(createUserDto)
-        if (file) {
-          createUserDto.imgUrl = file.filename;
-        }
+        if (file) {createUserDto.imgUrl = file.filename}
         createUserDto.type = {isStudent:false, isOrg:true}
         return this.usersService.createUser(createUserDto)
     }

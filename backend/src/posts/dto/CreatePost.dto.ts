@@ -4,6 +4,9 @@ import { ObjectId } from 'mongoose';
 export class CreatePostDto{
     @IsNotEmpty()
     userId: ObjectId;
+    
+    @IsNotEmpty()
+    category: string;
 
     @IsNotEmpty()
     title: string;

@@ -15,9 +15,25 @@ export class PostsService {
         private userModel: Model<User>, 
     ) {}
 
-    async createPost(createPostDto: CreatePostDto[]) {
+    async createPost(createPostDto: CreatePostDto) {
         const newPost = new this.postModel(createPostDto);
         return newPost.save();
+    }
+
+    async findAll() {
+        try {
+            const posts = await this.postModel
+                .find()
+                .populate({
+                    path: 'userId',
+                    model: this.userModel,
+                    select: 'name'
+                })
+                .exec();
+            return posts;
+        } catch (error) {
+            throw new Error('Failed to retrieve Posts');
+        }
     }
 
     async findAllPosts(id: string) {

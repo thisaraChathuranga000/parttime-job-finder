@@ -6,6 +6,9 @@ export class JobPost{
     userId: string;
 
     @Prop({required: true})
+    category: string;
+
+    @Prop({required: true})
     title: string;
 
     @Prop()
