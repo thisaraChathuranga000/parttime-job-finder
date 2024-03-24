@@ -12,8 +12,10 @@ import { useState } from "react";
 import Grid from "@mui/material/MenuItem";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
+import Select from "@mui/material/Select";
 import Box from "@mui/material/Box";
 import Backdrop from "@mui/material/Backdrop";
+import axios from "axios";
 
 const style = {
   position: "absolute",
@@ -37,20 +39,43 @@ const categories = [
 
 function PostJob(props) {
   const [selectedImage, setSelectedImage] = useState(null);
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
   const [open, setOpen] = useState(false);
+
+  const [formData, setFormData] = useState({
+    userId: "65ffd21e58661f9901764f91",
+    category: "",
+    title: "",
+    description: "",
+    location: "",
+    start_data:"",
+    end_data:"",
+    start_time:"",
+    end_time:"",
+    payment:"",
+    city:""
+  });
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
   };
 
-  const handleOpen = () => {
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleOpen = (event) => {
+    event.preventDefault();
     setOpen(true);
-    console.log("Uploading image:", selectedImage);
+    console.log(formData);
+    const formDataToSend = new FormData();
+    for (const key in formData) {formDataToSend.append(key, formData[key])}
+    if (selectedImage) {formDataToSend.append("file", selectedImage)}
+
+    axios.post("http://localhost:5000/posts", formDataToSend)
+    .then((response) => console.log(response.data))
+    .catch((error) => console.error(error))
   };
 
   const handleClose = () => setOpen(false);
@@ -65,139 +90,143 @@ function PostJob(props) {
   return (
     <div style={{ width: "97%", marginBottom: "30px", marginTop: "-25" }}>
 
-      <form> 
-     
-        <Card
-          sx={{
-            boxShadow: "0 4px 8px #4A4A4A",
-            border: "1px solid #0069c4",
-          }}
-        >
-          <CardContent
-            sx={{ flex: "1 0 auto", textAlign: "left", margin: "2%" }}
-          >
-            <Typography component="div" variant="h4" align="left">
-              Post a Job
-            </Typography>
+          <Card sx={{boxShadow: "0 4px 8px #4A4A4A",border: "1px solid #0069c4",}}>
+            <CardContent sx={{ flex: "1 0 auto", textAlign: "left", margin: "2%" }}>
+              <Typography component="div" variant="h4" align="left">Post a Job</Typography>
 
-            <div name="category">
+              <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Gender</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    label="Gender"
+                    value={formData.category}
+                    onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                  >
+                    <MenuItem value="Acounting & finance">Acounting & finance</MenuItem>
+                    <MenuItem value="Sales & Marketing">Sales & Marketing</MenuItem>
+                    <MenuItem value="IT & Digital media">IT & Digital media</MenuItem>
+                    <MenuItem value="Labour">Labour</MenuItem>
+                    <MenuItem value="Other">Other</MenuItem>
+                  </Select>
+                </FormControl>
+
               <TextField
-                id="outlined-select-currency"
-                select
-                label="Select a category"
-                sx={{ width: "45%", marginBottom: "20px", marginTop: "20px" }}
-                value={selectedOption}
-                onChange={handleOptionChange}
-                required
-              >
-                {categories.map((option, index) => (
-                  <MenuItem key={index} value={option}>
-                    {option}
-                  </MenuItem>
-                ))}
-              </TextField>
-            </div>
+                label="Title"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                sx={{  marginBottom: "20px" }}
+                name="title"
+                onChange={handleInputChange}
+              />
 
-            <div name="Title">
-              <FormControl sx={{ width: "98%", marginBottom: "20px" }}>
-                <InputLabel>Title</InputLabel>
-                <OutlinedInput id="outlined-adornment-amount" label="Title" />
-              </FormControl>
-            </div>
-
-            <div name="Discription">
+             
               <TextField
                 id="outlined-multiline-static"
                 label="Discription"
                 multiline
                 rows={4}
-                sx={{ width: "98%", marginBottom: "20px" }}
+                sx={{ marginBottom: "20px" }}
+                fullWidth
                 required
+                name="description"
+                onChange={handleInputChange}
               />
-            </div>
 
-            <div name="Image">
+             
               <TextField
                 type="file"
                 inputProps={{ accept: "image/*" }}
                 onChange={handleImageChange}
                 variant="outlined"
-                sx={{ width: "98%", marginBottom: "20px" }}
+                sx={{  marginBottom: "20px" }}
                 helperText="Upload a suitable image here"
                 required
+                fullWidth
+                name="file"
               />
-            </div>
 
-            <div name="Loacation">
-              <FormControl sx={{ width: "98%", marginBottom: "20px" }}>
-                <InputLabel>Location</InputLabel>
-                <OutlinedInput
-                  id="outlined-adornment-amount"
-                  label="location"
-                />
-              </FormControl>
-            </div>
+              <TextField
+                label="Location"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                sx={{  marginBottom: "20px" }}
+                name="location"
+                onChange={handleInputChange}
+              />
 
-            <div name="Date and time">
-              <Stack
-                spacing={2}
-                direction="row"
-                marginLeft={-2}
-                marginBottom={"20px"}
-              >
-                <Grid>
+              <TextField
+                label="City"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                sx={{  marginBottom: "20px" }}
+                name="city"
+                onChange={handleInputChange}
+              />
+
+            
+               <Grid container direction="row" justifyContent="flex-start" alignItems="flex-start" fullWidth spacing={2}>
+                <Grid lg={3} md={6} xs={12}>
                   <TextField
                     id="start-date"
                     helperText="Starting Date"
                     type="date"
-                    value={startDate}
-                    onChange={(e) => setStartDate(e.target.value)}
-                    sx={{ width: "90%" }}
+                    onChange={(e) => setFormData({ ...formData, start_data: e.target.value })}
+                    fullWidth
                     required
+                    value={formData.start_data}
                   />
                 </Grid>
-                <Grid>
+                 
+                <Grid lg={3} md={6} xs={12}>
                   <TextField
                     id="end-date"
                     helperText="End Date"
                     type="date"
-                    value={endDate}
-                    onChange={(e) => setEndDate(e.target.value)}
-                    sx={{ width: "90%" }}
+                    onChange={(e) => setFormData({ ...formData, end_data: e.target.value })}
+                    fullWidth
                     required
+                    value={formData.end_data}
                   />
                 </Grid>
-                <Grid>
+             
+                <Grid lg={3} md={6} xs={12}>
                   <TextField
                     id="start-time"
                     helperText="Starting Time"
                     type="time"
-                    value={startTime}
-                    onChange={(e) => setStartTime(e.target.value)}
-                    sx={{ width: "90%" }}
+                    onChange={(e) => setFormData({ ...formData, start_time: e.target.value })}
+                    fullWidth
                     required
+                    value={formData.start_time}
                   />
                 </Grid>
-                <Grid>
+               
+                <Grid lg={3} md={6} xs={12}>
                   <TextField
                     id="end-time"
                     helperText="End Time"
                     type="time"
-                    value={endTime}
-                    onChange={(e) => setEndTime(e.target.value)}
-                    sx={{ width: "90%" }}
+                    onChange={(e) => setFormData({ ...formData, end_time: e.target.value })}
+                    fullWidth
                     required
+                    value={formData.end_time}
                   />
                 </Grid>
-              </Stack>
-            </div>
-
-            <div name="Payment">
-              <FormControl sx={{ width: "45%", marginBottom: "20px" }}>
-                <InputLabel>Payment</InputLabel>
-                <OutlinedInput id="outlined-adornment-amount" label="Payment" />
-              </FormControl>
-            </div>
+              </Grid>
+               
+              <TextField
+                label="Payment"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                sx={{  marginBottom: "20px" }}
+                name="payment"
+                onChange={handleInputChange}
+              />
 
             <Stack spacing={2} direction="row">
               <Button variant="contained" disableElevation onClick={handleOpen} type="submit">
@@ -238,9 +267,8 @@ function PostJob(props) {
                 Discard job
               </Button>
             </Stack>
-          </CardContent>
-        </Card>
-        </form>
+            </CardContent>
+          </Card>
      
     </div>
   );

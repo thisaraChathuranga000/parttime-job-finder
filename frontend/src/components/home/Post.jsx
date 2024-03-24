@@ -11,9 +11,6 @@ import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
-import { Link } from "react-router-dom";
-
-import { useEffect, useState } from "react";
 
 
 const style = {
@@ -30,13 +27,13 @@ const style = {
 
 function Post({ post }) {
   const {
-    com_id,
+    userId,
     title,
     description,
     payment,
-    image,
-    start_date,
-    end_date,
+    img,
+    start_data,
+    end_data,
     start_time,
     end_time,
     location,
@@ -57,27 +54,12 @@ function Post({ post }) {
   return (
     <div className="feed">
       <Card sx={{ minWidth: 275, padding: "10px", boxShadow: "none" }}>
-        <Card
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            boxShadow: "0 4px 8px #4A4A4A",
-            border: "1px solid #0069c4",
-          }}
-        >
+        <Card sx={{display: "flex",flexDirection: "row",boxShadow: "0 4px 8px #4A4A4A",border: "1px solid #0069c4",}}>
           {/* post image */}
 
-          <CardMedia
-            sx={{
-              minWidth: 200,
-              maxWidth: 200,
-              width: "100%",
-              height: "auto",
-              marginRight: "10px",
-            }}
-          >
+          <CardMedia sx={{minWidth: 200,maxWidth: 200,width: "100%",height: "auto",marginRight: "10px",}}>
             <img
-              src={image}
+              src={`http://localhost:5000/posts/uploads/${img}`}
               alt={title}
               style={{ width: "400px", height: "300px", padding: "10px" }}
             />
@@ -85,74 +67,27 @@ function Post({ post }) {
 
           {/* post contents */}
 
-          <CardContent
-            sx={{ flex: "1 0 auto", textAlign: "left", marginLeft: "200px" }}
-          >
-            <Typography component="div" variant="h4">
-              {title}
-            </Typography>
-            <Typography
-              variant="subtitle1"
-              color="text.secondary"
-              component="div"
-            >
-              {com_id}
-            </Typography>
-            <Typography
-              variant="subtitle1"
-              color="text.secondary"
-              component="div"
-            >
-              {location}
-            </Typography>
-            <Typography
-              variant="subtitle1"
-              color="text.secondary"
-              component="div"
-            >
-              Starting date: {start_date}
-            </Typography>
-            <Typography
-              variant="subtitle1"
-              color="text.secondary"
-              component="div"
-            >
-              Ending date: {end_date}
-            </Typography>
-            <Typography
-              variant="subtitle1"
-              color="text.secondary"
-              component="div"
-            >
-              {start_time} - {end_time}
-            </Typography>
-            <Typography
-              variant="subtitle1"
-              color="text.secondary"
-              component="div"
-              marginBottom={-1}
-            >
-              Payment : {payment} LKR
-            </Typography>
+          <CardContent sx={{ flex: "1 0 auto", textAlign: "left", marginLeft: "200px" }}>
+            <Typography component="div" variant="h4">{title}</Typography>
+            <Typography variant="subtitle1" component="h4">{userId.name}</Typography>
+            <Typography variant="subtitle1" color="text.secondary" component="div">{location}</Typography>
+            <Typography variant="subtitle1" color="text.secondary" component="div">Starting date: {start_data}</Typography>
+            <Typography variant="subtitle1" color="text.secondary" component="div">Ending date: {end_data}</Typography>
+            <Typography variant="subtitle1" color="text.secondary" component="div">{start_time} - {end_time}</Typography>
+            <Typography variant="subtitle1" color="text.secondary" component="div" marginBottom={-1}>Payment : {payment} LKR</Typography>
 
             {/* Seemore Button */}
 
             <CardActions>
               <Button
                 size="large"
-                sx={{
-                  textTransform: "none",
-                  textAlign: "left",
-                  marginLeft: "-20px",
-                  marginBottom: "-10px",
-                }}
+                sx={{textTransform: "none", textAlign: "left", marginLeft: "-20px", marginBottom: "-10px"}}
                 onClick={handleOpen}
               >
                 see more...
               </Button>
+
               <Modal
-                aria-labelledby="transition-modal-title"
-                aria-describedby="transition-modal-description"
                 open={open}
                 onClose={handleClose}
                 closeAfterTransition
@@ -167,84 +102,19 @@ function Post({ post }) {
                   <Box sx={style}>
                     <Card>
                       <CardContent marginBottom="50px">
-                        <Typography component="div" variant="h4" align="left">
-                          {title}
-                        </Typography>
-                        <Typography
-                          variant="subtitle1"
-                          color="text.secondary"
-                          component="div"
-                          align="left"
-                        >
-                          {com_id}
-                        </Typography>
-                        <Typography
-                          variant="subtitle1"
-                          color="text.secondary"
-                          component="div"
-                          align="left"
-                        >
-                          {location}
-                        </Typography>
-                        <Typography
-                          variant="subtitle1"
-                          color="text.secondary"
-                          component="div"
-                          align="left"
-                        >
-                          Starting date: {start_date}
-                        </Typography>
-                        <Typography
-                          variant="subtitle1"
-                          color="text.secondary"
-                          component="div"
-                          align="left"
-                        >
-                          Ending date: {end_date}
-                        </Typography>
-                        <Typography
-                          variant="subtitle1"
-                          color="text.secondary"
-                          component="div"
-                          align="left"
-                        >
-                          {start_time} - {end_time}
-                        </Typography>
-                        <Typography
-                          variant="subtitle1"
-                          color="text.secondary"
-                          component="div"
-                          marginBottom={-1}
-                          align="left"
-                        >
-                          Payment: {payment} LKR
-                        </Typography>
-                        <Typography
-                          variant="subtitle1"
-                          id="description"
-                          color="text.secondary"
-                          marginTop={2}
-                          marginLeft={0}
-                          marginRight={2}
-                          align="left"
-                        >
-                          {description}
-                        </Typography>
+                        <Typography component="div" variant="h4" align="left">{title}</Typography>
+                        <Typography variant="subtitle1" component="h4">{userId.name}</Typography>
+                        <Typography variant="subtitle1" color="text.secondary" component="div" align="left">{location}</Typography>
+                        <Typography variant="subtitle1" color="text.secondary" component="div" align="left">Starting date: {start_data}</Typography>
+                        <Typography variant="subtitle1" color="text.secondary" component="div" align="left">Ending date: {end_data}</Typography>
+                        <Typography variant="subtitle1" color="text.secondary" component="div" align="left">{start_time} - {end_time}</Typography>
+                        <Typography variant="subtitle1" color="text.secondary" component="div" marginBottom={-1}align="left">Payment: {payment} LKR</Typography>
+                        <Typography variant="subtitle1" id="description" color="text.secondary" marginTop={2} marginLeft={0} marginRight={2} align="left">{description}</Typography>
                       </CardContent>
-                      <Stack
-                        spacing={2}
-                        direction="row"
-                        marginLeft={2}
-                        marginBottom={3}
-                      >
-                        {/* Apply for job button */}
 
-                        <Button variant="contained" onClick={handleOpen2}>
-                          Apply for job
-                        </Button>
+                      <Stack spacing={2} direction="row" marginLeft={2} marginBottom={3}>
+                        <Button variant="contained" onClick={handleOpen2}>Apply for job</Button>
                         <Modal
-                          aria-labelledby="transition-modal-title"
-                          aria-describedby="transition-modal-description"
                           open={open2}
                           onClose={handleClose2}
                           closeAfterTransition
