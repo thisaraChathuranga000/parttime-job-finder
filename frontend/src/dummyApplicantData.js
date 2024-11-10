@@ -7,7 +7,6 @@ export const ApplicantData = [
         university : "University of Sri Jayewardenepura",
         image : "assets/Applicants/student01.jpg",
         location : "Nugegoda"
-
     },
     {
         id: 1,
@@ -17,7 +16,6 @@ export const ApplicantData = [
         university : "University of Colombo",
         image : "assets/Applicants/applicant.jpeg",
         location : "Kirulapana"
-
     },
     {
         id: 3,
