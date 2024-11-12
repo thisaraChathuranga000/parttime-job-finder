@@ -1,12 +1,12 @@
 import React from "react";
-import "./orgProfileBar.css";
+import "./ProfileBar.css";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import StarRateIcon from "@mui/icons-material/StarRate";
 
-function OrgProfileBar() {
+function ProfileBar() {
   return (
     <div className="sidebar">
       <Box
@@ -35,30 +35,6 @@ function OrgProfileBar() {
             <StarRateIcon style={{ color: "#e89705" }} />
             <StarRateIcon style={{ color: "#e89705" }} />
           </Stack>
-
-          <p>Name</p>
-          <input
-            type="text"
-            disabled
-            style={{ width: "200px" }}
-            value={"MAS Holdings (pvt) Ltd"}
-          />
-
-          <p>Location</p>
-          <input
-            type="text"
-            disabled
-            style={{ width: "200px" }}
-            value={"Katunayake"}
-          />
-
-          <p>Email</p>
-          <input
-            type="text"
-            disabled
-            style={{ width: "200px" }}
-            value={"masholdings@gmail.com"}
-          />
         </div>
 
         <Button
@@ -80,4 +56,4 @@ function OrgProfileBar() {
   );
 }
 
-export default OrgProfileBar;
+export default ProfileBar;

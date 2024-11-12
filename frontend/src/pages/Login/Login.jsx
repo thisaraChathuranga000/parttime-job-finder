@@ -1,27 +1,25 @@
 import * as React from "react";
-import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
 import LoginBox from "../../components/Login/LoginBox";
 import Footer from "../../components/Login/Footer";
+import {Grid} from '@mui/material';
 
 function Login() {
   return (
     <div>
-      <Card
-        sx={{
-          display: "flex",
+      <Grid container spacing={0} sx={{
           backgroundImage: "url('assets/BG-15.png')",
           boxShadow: "none",
+          marginTop:0
         }}
       >
-        <CardMedia
-          component="img"
-          sx={{ width: "40%", pl: 20 }}
-          image="assets/Login.png"
-          alt="Login"
-        />
-        <LoginBox />
-      </Card>
+        <Grid lg={6} pl={10}>
+            <img src="assets/Login.png" alt="login" />
+        </Grid>
+
+        <Grid lg={6}>
+          <LoginBox />
+        </Grid>
+      </Grid>
       <Footer />
     </div>
   );

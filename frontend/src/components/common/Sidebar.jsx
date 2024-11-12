@@ -47,9 +47,7 @@ const card = (
   ];
 
 function Sidebar() {
-  const [selectedLocation, setSelectedLocation] = useState("Any");
   const [selectedPayment, setSelectedPayment] = useState("Any");
-  const [selectedDate, setSelectedDate] = useState("All time");
   return (
     <div className="sidebar" data-testid="filter">
         <Box

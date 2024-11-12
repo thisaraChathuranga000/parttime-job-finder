@@ -20,10 +20,9 @@ function LoginBox() {
     <div>
       <Box
         sx={{
-          display: "flex",
           flexDirection: "column",
-          pt: "15%",
-          pl: "30%",
+          pt: "10%",
+          pl: "15%",
           pb: "2%",
         }}
       >
@@ -63,6 +62,7 @@ function LoginBox() {
                 onChange={(e) => setPassword(e.target.value)}
               />
               <Button
+                sx={{marginTop:1}}
                 variant="contained"
                 color="primary"
                 fullWidth
@@ -83,7 +83,7 @@ function LoginBox() {
             </Typography>
             <Typography variant="body2" align="center">
               Don't have an account?{" "}
-              <Link href="#" color="primary">
+              <Link href="/sign-up" color="primary">
                 Sign Up
               </Link>
             </Typography>

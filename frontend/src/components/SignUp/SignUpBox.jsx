@@ -63,7 +63,7 @@ function SignUpBox() {
 
                 <Typography variant="body2" align="center" sx={{ pt: 2 }}>
                   Allready Have an account?{" "}
-                  <Link href="#" color="primary">Log in</Link>
+                  <Link href="/login" color="primary">Log in</Link>
                 </Typography>
               </div>
             ) : (

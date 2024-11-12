@@ -19,10 +19,6 @@ import { Link } from "react-router-dom";
 function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -39,7 +35,6 @@ function Header() {
           }}
         >
           <Toolbar>
-         
               <IconButton
                 size="extra-large"
                 edge="start"
@@ -65,7 +60,7 @@ function Header() {
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
               <Stack spacing={2} direction="row" marginTop={1} marginRight={1}>
-                <Link to="/Login">
+                <Link to="/login">
                   <Button
                     variant="contained"
                     sx={{
@@ -77,21 +72,22 @@ function Header() {
                   >
                     Log in
                   </Button>
-                  
                 </Link>
 
-                <Button
-                  variant="outlined"
-                  sx={{
-                    borderRadius: "50px",
-                    fontSize: "12px",
-                    width: "100px",
-                    height: "30px",
-                  }}
-                  onClick={handleMenu}
-                >
-                  Sign Up
-                </Button>
+                <Link to="/sign-up">
+                  <Button
+                    variant="outlined"
+                    sx={{
+                      borderRadius: "50px",
+                      fontSize: "12px",
+                      width: "100px",
+                      height: "30px",
+                    }}
+                  >
+                    Sign Up
+                  </Button>
+                </Link>
+
                 <Menu
                   id="menu-appbar"
                   anchorEl={anchorEl}
@@ -129,7 +125,6 @@ function Header() {
                 aria-label="show 4 new mails"
                 color="primary"
                 sx={{ marginRight: 1 }}
-                 
               >
                 <Badge badgeContent={4} color="error">
                   <MailIcon />
@@ -146,17 +141,18 @@ function Header() {
                   <NotificationsIcon />
                 </Badge>
               </IconButton>
-
-              <IconButton
-                size="large"
-                edge="end"
-                aria-label="account of current user"
-                aria-haspopup="true"
-                color="primary"
-                sx={{ marginRight: 1 }}
-              >
-                <AccountCircle />
-              </IconButton>
+              <Link to="/internal-profile">
+                <IconButton
+                  size="large"
+                  edge="end"
+                  aria-label="account of current user"
+                  aria-haspopup="true"
+                  color="primary"
+                  sx={{ marginRight: 1 }}
+                >
+                  <AccountCircle />
+                </IconButton>
+              </Link>
             </Box>
           </Toolbar>
         </AppBar>
