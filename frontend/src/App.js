@@ -1,16 +1,12 @@
 import "./App.css";
 import Home from "./pages/Home/Home";
 import Header from "./components/common/Header";
-import StdProfileInternal from "./pages/profile/StdProfileInternal";
-import OrgProfileInternal from "./pages/profile/OrgProfileInternal";
+import Internal from "./pages/Profile/Internal/Internal";
 import FilterEmployees from "./pages/FilterEmployees";
-import StdProfileExternalView from "./pages/profile/StdProfileExternalView";
-import OrgProfileExternal from "./pages/profile/OrgProfileExternal";
-import Login from "./pages/profile/Login";
-import SignUpStudent from "./pages/profile/SignUpStudent";
-import SignUpOrg from "./pages/profile/SignUpOrg";
-import Admin from "./pages/Admin/Admin";
-import LoginAdmin from "./pages/profile/LoginAdmin";
+import StdProfileExternalView from "./pages/Profile/External/StdProfileExternalView"
+import OrgProfileExternalView from "./pages/Profile/External/OrgProfileExternalView";
+import Login from "./pages/Login/Login";
+import SignUp from "./pages/SignUp/SignUp";
 import { Route, Routes } from "react-router-dom";
 
 function App() {
@@ -20,19 +16,12 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/StdProfileInternal" element={<StdProfileInternal />} />
-        <Route path="/OrgProfileInternal" element={<OrgProfileInternal />} />
+        <Route path="/internal-profile" element={<Internal />} />
         <Route path="/FilterEmployees" element={<FilterEmployees />} />
-        <Route
-          path="/StdProfileExternal"
-          element={<StdProfileExternalView />}
-        />
-        <Route path="/OrgProfileExternal" element={<OrgProfileExternal />} />
+        <Route path="/StdProfileExternal"  element={<StdProfileExternalView />}/>
+        <Route path="/OrgProfileExternal" element={<OrgProfileExternalView  />} />
         <Route path="/Login" element={<Login />} />
-        <Route path="/SignUpStudent" element={<SignUpStudent />} />
-        <Route path="/SignUpOrg" element={<SignUpOrg />} />
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/adminlogin" element={<LoginAdmin />} /> 
+        <Route path="/Sign-up" element={<SignUp />} />
       </Routes>
     </div>
   );

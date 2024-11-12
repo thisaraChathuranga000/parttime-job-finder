@@ -1,8 +1,6 @@
 import React from 'react'
-import Profilebar from '../../components/StdProfileUserView/Profilebar'
-import JobTabs from '../../components/StdProfileUserView/JobTabs'
-
- 
+import Profilebar from '../../../components/StdProfileUserView/Profilebar'
+import JobTabs from '../../../components/StdProfileUserView/JobTabs'
 
 function StdProfileInternal() {
   return (

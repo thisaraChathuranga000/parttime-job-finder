@@ -1,5 +1,5 @@
 import * as React from "react";
-import "./OrgProfileBarInternal.css";
+import "./profile.css";
 import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
 import Avatar from "@mui/material/Avatar";
@@ -16,7 +16,7 @@ const StyledText = styled("div")(({ theme }) => ({
   padding: theme.spacing(1),
 }));
 
-function OrgProfileBarInternal() {
+function ProfileBar() {
 
   const [companyDetails, setCompanyDetails] = useState({
     com_name: "",
@@ -101,7 +101,7 @@ function OrgProfileBarInternal() {
             value={companyDetails.com_contact}
           />
 
-          <p>Residential Address</p>
+          <p>Address</p>
           <input
             type="text"
             disabled
@@ -135,4 +135,4 @@ function OrgProfileBarInternal() {
   );
 }
 
-export default OrgProfileBarInternal;
+export default ProfileBar;

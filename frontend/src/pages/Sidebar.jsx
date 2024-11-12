@@ -63,43 +63,6 @@ function Sidebar() {
         >
           <h3>Filters</h3>
           <FormControl>
-            <FormLabel id="Location" style={{ color: "black" }}>
-              <h4>Location</h4>
-            </FormLabel>
-            <RadioGroup
-              aria-labelledby="demo-radio-buttons-group-label"
-              defaultValue="female"
-              name="radio-buttons-group"
-              onChange={(event) => setSelectedLocation(event.target.value)}
-            >
-              <FormControlLabel
-                data-testid="formContent01"
-                value="Any"
-                control={<Radio />}
-                label={<span style={{ color: "#393F47" }}>{location[0]}</span>}
-              />
-              <FormControlLabel
-                value="Near me"
-                control={<Radio />}
-                label={<span style={{ color: "#393F47" }}>{location[1]}</span>}
-              />
-              <FormControlLabel
-                value="Within 15 KM"
-                control={<Radio />}
-                label={<span style={{ color: "#393F47" }}>{location[2]}</span>}
-              />
-              <FormControlLabel
-                value="Within 30 KM"
-                control={<Radio />}
-                label={<span style={{ color: "#393F47" }}>{location[3]}</span>}
-              />
-              <FormControlLabel
-                value="Within 50 KM"
-                control={<Radio />}
-                label={<span style={{ color: "#393F47" }}>{location[4]}</span>}
-              />
-            </RadioGroup>
-
             <FormLabel id="Payment" style={{ color: "black" }}>
               <h4>Payment</h4>
             </FormLabel>

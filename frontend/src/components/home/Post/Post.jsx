@@ -32,10 +32,7 @@ function Post({ post }) {
     description,
     payment,
     img,
-    start_data,
-    end_data,
-    start_time,
-    end_time,
+    date,
     location,
   } = post;
 
@@ -70,10 +67,7 @@ function Post({ post }) {
           <CardContent sx={{ flex: "1 0 auto", textAlign: "left", marginLeft: "200px" }}>
             <Typography component="div" variant="h4">{title}</Typography>
             <Typography variant="subtitle1" component="h4">{userId.name}</Typography>
-            <Typography variant="subtitle1" color="text.secondary" component="div">{location}</Typography>
-            <Typography variant="subtitle1" color="text.secondary" component="div">Starting date: {start_data}</Typography>
-            <Typography variant="subtitle1" color="text.secondary" component="div">Ending date: {end_data}</Typography>
-            <Typography variant="subtitle1" color="text.secondary" component="div">{start_time} - {end_time}</Typography>
+            <Typography variant="subtitle1" component="h4">{date}</Typography>
             <Typography variant="subtitle1" color="text.secondary" component="div" marginBottom={-1}>Payment : {payment} LKR</Typography>
 
             {/* Seemore Button */}
@@ -105,9 +99,7 @@ function Post({ post }) {
                         <Typography component="div" variant="h4" align="left">{title}</Typography>
                         <Typography variant="subtitle1" component="h4">{userId.name}</Typography>
                         <Typography variant="subtitle1" color="text.secondary" component="div" align="left">{location}</Typography>
-                        <Typography variant="subtitle1" color="text.secondary" component="div" align="left">Starting date: {start_data}</Typography>
-                        <Typography variant="subtitle1" color="text.secondary" component="div" align="left">Ending date: {end_data}</Typography>
-                        <Typography variant="subtitle1" color="text.secondary" component="div" align="left">{start_time} - {end_time}</Typography>
+                        <Typography variant="subtitle1" color="text.secondary" component="div" align="left">{date}</Typography>
                         <Typography variant="subtitle1" color="text.secondary" component="div" marginBottom={-1}align="left">Payment: {payment} LKR</Typography>
                         <Typography variant="subtitle1" id="description" color="text.secondary" marginTop={2} marginLeft={0} marginRight={2} align="left">{description}</Typography>
                       </CardContent>

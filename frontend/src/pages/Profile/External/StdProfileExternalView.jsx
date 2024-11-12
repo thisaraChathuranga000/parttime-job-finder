@@ -1,9 +1,9 @@
 import React from "react";
-import ProfileBar from "../../components/StdProfileExternal/ProfileBar";
-import CompletedJobChart from "../../components/StdProfileExternal/CompletedJobChart";
-import JobCards from "../../components/StdProfileExternal/JobCards";
+import ProfileBar from "../../../components/StdProfileExternal/ProfileBar";
+import CompletedJobChart from "../../../components/StdProfileExternal/CompletedJobChart";
+import JobCards from "../../../components/StdProfileExternal/JobCards";
 import Typography from "@mui/material/Typography";
-import PrefferedCategories from "../../components/StdProfileExternal/PrefferedCategories";
+import PrefferedCategories from "../../../components/StdProfileExternal/PrefferedCategories";
 
 function StdProfileExternalView() {
   return (

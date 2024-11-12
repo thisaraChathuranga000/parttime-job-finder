@@ -1,8 +1,8 @@
 import * as React from "react";
-import Post from "../../components/home/Post";
-import SearchBar from "../../components/home/SearchBar";
+import Post from "../../components/home/Post/Post";
+import SearchBar from "../../components/home/SearchBar/SearchBar";
 import "./home.css";
-import "../../components/home/filter.css";
+import "../../components/home/Filter/filter.css";
 import Sidebar from "../Sidebar";
 import { useState, useEffect } from "react";
 

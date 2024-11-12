@@ -22,7 +22,6 @@ function Login() {
         />
         <LoginBox />
       </Card>
-
       <Footer />
     </div>
   );

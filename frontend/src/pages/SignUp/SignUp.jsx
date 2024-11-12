@@ -1,10 +1,10 @@
 import React from "react";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
-import SignUpBox from "../../components/SignUpStudents/SignUpBox";
-import Footer from "../../components/SignUpStudents/Footer";
+import SignUpBox from "../../components/SignUp/SignUpBox";
+import Footer from "../../components/SignUp/Footer";
 
-function SignUpStudent() {
+function SignUp() {
   return (
     <div>
       <div>
@@ -29,4 +29,4 @@ function SignUpStudent() {
   );
 }
 
-export default SignUpStudent;
+export default SignUp;
