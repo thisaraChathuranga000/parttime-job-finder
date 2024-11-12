@@ -1,5 +1,5 @@
 import "./App.css";
-import Home from "./pages/Home";
+import Home from "./pages/Home/Home";
 import Header from "./components/common/Header";
 import StdProfileInternal from "./pages/profile/StdProfileInternal";
 import OrgProfileInternal from "./pages/profile/OrgProfileInternal";
@@ -9,7 +9,7 @@ import OrgProfileExternal from "./pages/profile/OrgProfileExternal";
 import Login from "./pages/profile/Login";
 import SignUpStudent from "./pages/profile/SignUpStudent";
 import SignUpOrg from "./pages/profile/SignUpOrg";
-import Admin from "./pages/Admin";
+import Admin from "./pages/Admin/Admin";
 import LoginAdmin from "./pages/profile/LoginAdmin";
 import { Route, Routes } from "react-router-dom";
 
@@ -18,12 +18,6 @@ function App() {
     <div className="App">
       
       <Header />
-      {/* <h1>text</h1>
-      <img
-        src={"http://localhost:5000/users/uploads/eed9590dfe1b06690d2c4c2cbb4d0c2a"}
-        alt='jjj'
-        style={{ width: "400px" }}
-      /> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/StdProfileInternal" element={<StdProfileInternal />} />

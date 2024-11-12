@@ -5,14 +5,14 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Status from "../components/admin/Status";
-import Verification from "../components/admin/Verification";
+import Status from "../../components/admin/Status";
+import Verification from "../../components/admin/Verification";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import { users } from "../DummyUsers";
-import Users from "../components/admin/Users";
-import Payment from "../components/admin/Payment";
-import { Payments } from "../DummyPayment";
+import { users } from "../../DummyUsers";
+import Users from "../../components/admin/Users";
+import Payment from "../../components/admin/Payment";
+import { Payments } from "../../DummyPayment";
 
 const TOTAL_PAYMENT = `Total paymentS (last Month)`;
 
