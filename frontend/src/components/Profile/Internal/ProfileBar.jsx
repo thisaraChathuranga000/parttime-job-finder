@@ -6,8 +6,6 @@ import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import StarRateIcon from "@mui/icons-material/StarRate";
-import { useState, useEffect } from "react";
-import axios from "axios";
 
 
 const StyledText = styled("div")(({ theme }) => ({
@@ -17,30 +15,6 @@ const StyledText = styled("div")(({ theme }) => ({
 }));
 
 function ProfileBar() {
-
-  const [companyDetails, setCompanyDetails] = useState({
-    com_name: "",
-    com_email: "",
-    com_contact: "",
-    com_address: "",
-    com_img:"",
-  });
-
-  useEffect(() => {
-    async function fetchCompanyDetails() {
-      try {
-        const response = await fetch("http://localhost:5000/api/users/get/employee/64e5ebd0791e75fb43a64aa5");
-        const data = await response.json();
-        setCompanyDetails(data); // Update companyDetails state with retrieved data
-      } catch (error) {
-        console.error("An error occurred:", error);
-      }
-    }
-
-    fetchCompanyDetails();
-  }, []); 
-
- 
   return (
     <div className="sidebar">
       <Box
@@ -54,7 +28,7 @@ function ProfileBar() {
       >
         <div style={{ marginLeft: "10px" }}>
           <h3>Profile</h3>
-
+          
           <Stack direction="row" spacing={2}>
             <Avatar
               alt="Remy Sharp"
@@ -78,36 +52,13 @@ function ProfileBar() {
           </Stack>
 
           <p>Name</p>
-          <input
-            type="text"
-            disabled
-            style={{ width: "90%" }}
-            value={companyDetails.com_name}
-          />
-
+          <input type="text" disabled style={{ width: "90%" }} /><p>Name</p>
           <p>Email</p>
-          <input
-            type="text"
-            disabled
-            style={{ width: "90%"  }}
-            value={companyDetails.com_email}
-          />
-
+          <input type="text" disabled style={{ width: "90%" }} /><p>Email</p>
           <p>Contact</p>
-          <input
-            type="text"
-            disabled
-            style={{ width: "90%" }}
-            value={companyDetails.com_contact}
-          />
-
+          <input type="text" disabled style={{ width: "90%" }} /><p>Contact</p>
           <p>Address</p>
-          <input
-            type="text"
-            disabled
-            style={{ width: "90%"  }}
-            value={companyDetails.com_address}
-          />
+          <input type="text" disabled style={{ width: "90%" }} /><p>Address</p>
 
         </div>
         <Button

@@ -3,7 +3,7 @@ import Post from "../../components/home/Post/Post";
 import SearchBar from "../../components/home/SearchBar/SearchBar";
 import "./home.css";
 import "../../components/home/Filter/filter.css";
-import Sidebar from "../Sidebar";
+import Sidebar from "../../components/common/Sidebar";
 import { useState, useEffect } from "react";
 
 function Home() {

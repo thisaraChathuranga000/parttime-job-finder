@@ -2,7 +2,6 @@ import "./App.css";
 import Home from "./pages/Home/Home";
 import Header from "./components/common/Header";
 import Internal from "./pages/Profile/Internal/Internal";
-import FilterEmployees from "./pages/FilterEmployees";
 import StdProfileExternalView from "./pages/Profile/External/StdProfileExternalView"
 import OrgProfileExternalView from "./pages/Profile/External/OrgProfileExternalView";
 import Login from "./pages/Login/Login";
@@ -12,12 +11,10 @@ import { Route, Routes } from "react-router-dom";
 function App() {
   return (
     <div className="App">
-      
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/internal-profile" element={<Internal />} />
-        <Route path="/FilterEmployees" element={<FilterEmployees />} />
         <Route path="/StdProfileExternal"  element={<StdProfileExternalView />}/>
         <Route path="/OrgProfileExternal" element={<OrgProfileExternalView  />} />
         <Route path="/Login" element={<Login />} />
