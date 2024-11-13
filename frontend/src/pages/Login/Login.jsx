@@ -1,27 +1,19 @@
 import * as React from "react";
 import LoginBox from "../../components/Login/LoginBox";
-import Footer from "../../components/Login/Footer";
 import {Grid} from '@mui/material';
+import AuthLayout from "../../components/Layouts/AuthLayout";
 
 function Login() {
   return (
-    <div>
-      <Grid container spacing={0} sx={{
-          backgroundImage: "url('assets/BG-15.png')",
-          boxShadow: "none",
-          marginTop:0
-        }}
-      >
-        <Grid lg={6} pl={10}>
-            <img src="assets/Login.png" alt="login" />
+    <AuthLayout>
+        <Grid container lg={6} md={2} justifyContent="center" class="img">
+          <img src="assets/Login.png" alt="login"/>
         </Grid>
 
-        <Grid lg={6}>
+        <Grid container lg={6} md={4} sm={12} xs={12} justifyContent="center" alignItems="center"  >
           <LoginBox />
-        </Grid>
-      </Grid>
-      <Footer />
-    </div>
+        </Grid>      
+    </AuthLayout>
   );
 }
 

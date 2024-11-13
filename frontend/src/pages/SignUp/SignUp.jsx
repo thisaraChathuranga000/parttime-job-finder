@@ -1,31 +1,19 @@
 import React from "react";
-import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
 import SignUpBox from "../../components/SignUp/SignUpBox";
-import Footer from "../../components/SignUp/Footer";
+import {Grid} from '@mui/material';
+import AuthLayout from "../../components/Layouts/AuthLayout";
 
 function SignUp() {
   return (
-    <div>
-      <div>
-        <Card
-          sx={{
-            display: "flex",
-            backgroundImage: "url('assets/BG-15.png')",
-            boxShadow: "none",
-          }}
-        >
-          <SignUpBox />
-          <CardMedia
-            component="img"
-            sx={{ width: "500px", pl: "5%" }}
-            image="assets/signup.png"
-            alt="Sign Up"
-          />
-        </Card>
-        <Footer/>
-      </div>
-    </div>
+    <AuthLayout>
+      <Grid container lg={6} md={4} sm={12} xs={12} justifyContent="center" alignItems="center"  >
+        <SignUpBox />
+      </Grid>
+
+      <Grid container lg={6} md={4} justifyContent="center" class="img">
+        <img src="assets/signup.png" alt="login"/>
+      </Grid>      
+    </AuthLayout>
   );
 }
 

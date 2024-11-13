@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import FormBox from "../Layouts/FormBox";
 
 function SignUpBox() {
   const [step, setStep] = useState(1);
@@ -24,9 +25,7 @@ function SignUpBox() {
 
   return (
     <div>
-      <Box sx={{ display: "flex", flexDirection: "column", pt: 5, pl: 28, marginBottom: 4 }}>
-        <Card variant="outlined" sx={{ boxShadow: "0 4px 8px #4A4A4A", border: "1px solid #0069c4", width: "400px", pb: 4 }}>
-          <CardContent sx={{ width: "340px", pl: 3.5 }}>
+      <FormBox maxWidth={320} p={5}>
             {step === 1 ? (
               <div>
                 <Typography variant="h4" gutterBottom>
@@ -111,9 +110,8 @@ function SignUpBox() {
                 </Button>
               </div>
             )}
-          </CardContent>
-        </Card>
-      </Box>
+
+      </FormBox>
     </div>
   );
 }

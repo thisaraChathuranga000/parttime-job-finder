@@ -1,11 +1,10 @@
 import React, { useRef, useState } from "react";
 import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
+import FormBox from "../Layouts/FormBox";
 
 function LoginBox() {
   const [email, setEmail] = useState("");
@@ -18,26 +17,9 @@ function LoginBox() {
 
   return (
     <div>
-      <Box
-        sx={{
-          flexDirection: "column",
-          pt: "10%",
-          pl: "15%",
-          pb: "2%",
-        }}
-      >
-        <Card
-          variant="outlined"
-          sx={{
-            boxShadow: "0 4px 8px #4A4A4A",
-            border: "1px solid #0069c4",
-            width: "400px",
-            pb: 4,
-          }}
-        >
-          <CardContent sx={{ width: "340px", pl: 3.5 }}>
+      <FormBox maxWidth={320} p={5}>
             <Typography variant="h4" gutterBottom>
-              Log In
+              LogIn
             </Typography>
 
             <form onSubmit={handleChange}>
@@ -87,9 +69,7 @@ function LoginBox() {
                 Sign Up
               </Link>
             </Typography>
-          </CardContent>
-        </Card>
-      </Box>
+      </FormBox>
     </div>
   );
 }
