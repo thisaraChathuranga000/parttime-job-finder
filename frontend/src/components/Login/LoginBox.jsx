@@ -18,7 +18,7 @@ function LoginBox() {
   return (
     <div>
       <FormBox maxWidth={320} p={5}>
-            <Typography variant="h4" gutterBottom>
+            <Typography variant="h4" gutterBottom textAlign={"center"}>
               LogIn
             </Typography>
 

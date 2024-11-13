@@ -28,7 +28,7 @@ function SignUpBox() {
       <FormBox maxWidth={320} p={5}>
             {step === 1 ? (
               <div>
-                <Typography variant="h4" gutterBottom>
+                <Typography variant="h4" gutterBottom textAlign={"center"}>
                   Sign Up
                 </Typography>
 

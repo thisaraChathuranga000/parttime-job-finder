@@ -6,7 +6,7 @@ import AuthLayout from "../../components/Layouts/AuthLayout";
 function Login() {
   return (
     <AuthLayout>
-        <Grid container lg={6} md={2} justifyContent="center" class="img">
+        <Grid container lg={6} md={2} justifyContent="center" class="displayNone">
           <img src="assets/Login.png" alt="login"/>
         </Grid>
 

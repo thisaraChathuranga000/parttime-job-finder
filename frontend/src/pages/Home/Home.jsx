@@ -1,41 +1,25 @@
 import * as React from "react";
 import Post from "../../components/home/Post/Post";
 import SearchBar from "../../components/home/SearchBar/SearchBar";
-import "./home.css";
-import "../../components/home/Filter/filter.css";
-import Sidebar from "../../components/common/Sidebar";
-import { useState, useEffect } from "react";
+import Sidebar from "../../components/home/SideBar/Sidebar";
+import { postData } from "../../dummyData";
+import Grid from '@mui/material/Grid';
 
 function Home() {
-  const [postData, setPostData] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("http://localhost:5000/posts/all");
-        if (!response.ok) {
-          throw new Error("Failed to fetch data");
-        }
-        const data = await response.json();
-        setPostData(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
   return (
-    <div className="homeContainer">
-      <Sidebar/>
-
-      <div className="mainSpace">
-        <SearchBar />
-        {postData.map((post) => (
-          <Post key={post._id} post={post} />
-        ))}
-      </div>
+    <div>
+      <Grid container p={4}>
+        <Grid lg={3} md={3} sm={12} xs={12}>
+          <SearchBar />
+          <Sidebar/>
+        </Grid>
+        
+        <Grid container lg={9} md={9} sm={12} xs={12} justifyContent="center">
+          {postData.map((post) => (
+            <Post key={post._id} post={post} />
+          ))}
+        </Grid>
+      </Grid>
     </div>
   );
 }

@@ -10,7 +10,7 @@ function SignUp() {
         <SignUpBox />
       </Grid>
 
-      <Grid container lg={6} md={4} justifyContent="center" class="img">
+      <Grid container lg={6} md={4} justifyContent="center" class="displayNone">
         <img src="assets/signup.png" alt="login"/>
       </Grid>      
     </AuthLayout>

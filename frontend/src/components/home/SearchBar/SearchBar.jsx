@@ -9,18 +9,13 @@ import IconButton from "@mui/material/IconButton";
 function SearchBar() {
   return (
     <div>
-      <Box
-        sx={{ flexGrow: 1, width: "100%", marginLeft: "2%" }}
-        display="flex"
-        flexDirection="row"
-      >
+      <Box sx={{ backgroundColor: "#C5EDE7",fontSize: "14px",borderRadius: "6px",marginBottom:2}}>
         <Paper
           component="form"
           sx={{
             p: "2px 4px",
             display: "flex",
             alignItems: "center",
-            width: 500,
           }}
         >
           <InputBase
