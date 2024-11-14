@@ -9,6 +9,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import BoxLayout from '../../Layouts/BoxLayout';
   
 const timeOfPost = [`All time`,`Last 24 hours`,`Last 3 days`,`Last 7 days`];
 
@@ -16,10 +17,7 @@ function Sidebar() {
   const [selectedTime, setSelectedTime] = useState("Any");
   return (
     <div>
-        <Box
-          pt={2} pl={4} pb={2} pr={4}
-          sx={{ backgroundColor: "#C5EDE7",fontSize: "14px",borderRadius: "6px",marginBottom:2}}
-        >
+        <BoxLayout>
           <FormControl>
             <FormLabel id="postedDate" style={{ color: "black" }}>
               <h4>Filter by posted time</h4>
@@ -40,7 +38,7 @@ function Sidebar() {
               ))}
             </RadioGroup>
           </FormControl>
-        </Box>
+        </BoxLayout>
 
         <div className="displayNone">
           <Box 
