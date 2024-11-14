@@ -24,9 +24,9 @@ function Header() {
   };
   return (
     <div>
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ flexGrow: 1 }} pb={8}>
         <AppBar
-          position="static"
+          position="fixed"
           sx={{
             backgroundColor: "white",
             minHeight: 20,

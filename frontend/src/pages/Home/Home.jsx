@@ -9,7 +9,7 @@ function Home() {
   return (
     <div>
       <Grid container p={4}>
-        <Grid lg={3} md={3} sm={12} xs={12}>
+        <Grid lg={3} md={3} sm={12} xs={12} >
           <SearchBar />
           <Sidebar/>
         </Grid>

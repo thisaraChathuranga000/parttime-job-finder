@@ -11,12 +11,14 @@ function SearchBar() {
     <div>
       <Box sx={{ backgroundColor: "#C5EDE7",fontSize: "14px",borderRadius: "6px",marginBottom:2}}>
         <Paper
+        
           component="form"
           sx={{
             p: "2px 4px",
             display: "flex",
             alignItems: "center",
           }}
+          
         >
           <InputBase
             sx={{ ml: 1, flex: 1 }}
