@@ -17,9 +17,10 @@ import Stack from "@mui/material/Stack";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { ApplicantData } from "../../../dummyApplicantData";
 import AllApplicant from "./AllApplicant";
+import Grid from '@mui/material/Grid';
 
 function ProfileDashBoard() {
-  const [isPostJobVisible, setPostJobVisible] = useState(false);
+  const [isPostJobVisible, setPostJobVisible] = useState(true);
   const [isAllJobVisible, setAllJobVisible] = useState(false)
   const [isVisibleApplicants, setIsVisibleApplicants] = useState(false);
 
@@ -30,193 +31,153 @@ function ProfileDashBoard() {
   const handleAllJobs = () => {setAllJobVisible(true)}
   
   return (
-    <div style={{marginTop:"-43%", width:"73%", marginLeft:"27%"}}> 
+    <div> 
         <BannerOrgProfile onPostJobClick={handlePostJobClick}/>
         {isPostJobVisible && <PostJob onDiscardJob={handleDiscardJob} />}
 
-        <div style={{  width:"97%", marginBottom: "30px", marginTop:"-25"}}>
-          {/* Applied Jobs */}
-          <Accordion sx={{ boxShadow: "0 4px 8px #4A4A4A", border: "1px solid #0069c4"}}>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1-content"
-              id="panel1-header"
-            >
-              Applied Jobs 13
-            </AccordionSummary>
-            <AccordionDetails>
-              <Card
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    backgroundColor: "#1769aa",
-                    color: "white",
-                    marginBottom: "20px",
-                  }}
-                >
-                  <Box>
-                    <CardMedia
-                      component="img"
-                      sx={{
-                        width: 151,
-                        height: 110,
-                        marginLeft: "20px",
-                        marginTop: "25px",
-                        borderRadius: 2,
-                      }}
-                      image={"/"}
-                      alt="Live from space album cover"
-                    />
-                  </Box>
+        <div> 
+          <Box 
+            sx={{fontSize: "14px",borderRadius: "6px", border:"1px solid rgba(0, 0, 0, 0.12)"}}
+            marginLeft={2}
+            marginBottom={2}
+          >
+            <Accordion sx={{ boxShadow: "0 4px 8px #4A4A4A", border: "1px solid #0069c4"}} marginLeft={2}>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1-content"
+                id="panel1-header"
+              >
+                Applied Jobs 13
+              </AccordionSummary>
+              <AccordionDetails>
+                <Grid container lg={12} md={12} sm={12} xs={12}>
+                  <Box
+                      sx={{fontSize: "14px",borderRadius: "6px", border:"1px solid rgba(0, 0, 0, 0.12)"}}
+                      marginLeft={2}
+                      marginBottom={2}
+                      width={250}
+                    >
+                      <Grid container lg={12} justifyContent="center" p={2}>
+                        <img
+                          // src={`http://localhost:5000/posts/uploads/${img}`}
+                          src={"/assets/jobs/stockCounting.jpg"}
+                          alt={"title"}
+                          style={{ width:"200px", height:"150px"  }}
+                        />
+                      </Grid>
 
-                  <Box fullwidth sx={{ display: "flex", flexDirection: "column",width:"90%" }}>
-                    <CardContent sx={{ marginLeft: "20px" }}>
-                      <Typography variant="h5" sx={{ textAlign: "left" }}>
-                        {"title"}
-                      </Typography>
-                      <Typography variant="subtitle2" sx={{ textAlign: "left" }}>
-                        Applied Time  
-                      </Typography>
-                    </CardContent>
+                      <Grid container lg={12} direction="column" justifyContent="left" pl={3} pb={3} pr={3}>
+                          <Typography variant="h5" sx={{ textAlign: "left" }}>
+                            {"title"}
+                          </Typography>
+                          <Typography variant="subtitle2" sx={{ textAlign: "left" }}>
+                            Applied Time  
+                          </Typography>
+                          <Typography variant="subtitle2" sx={{ textAlign: "left" , color:"", marginBottom:1}}>
+                            Pending  
+                          </Typography>  
+                          <Button variant="contained" sx={{textTransform: "none"}}>
+                            Remove Application
+                          </Button>                    
+                      </Grid>
                   </Box>
 
                   <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      marginTop: "25px",
-                      marginLeft: "40%",
-                      marginRight: "1%",
-                    }}
-                  >
-                    <Typography variant="subtitle2" sx={{ textAlign: "left" , color:""}}>
-                      Pending  
-                    </Typography>
+                      sx={{fontSize: "14px",borderRadius: "6px", border:"1px solid rgba(0, 0, 0, 0.12)"}}
+                      marginLeft={2}
+                      marginBottom={2}
+                      width={250}
+                    >
+                      <Grid container lg={12} justifyContent="center" p={2}>
+                        <img
+                          // src={`http://localhost:5000/posts/uploads/${img}`}
+                          src={"/assets/jobs/stockCounting.jpg"}
+                          alt={"title"}
+                          style={{ width:"200px", height:"150px"  }}
+                        />
+                      </Grid>
 
-                    <IconButton
-                        color="inherit"
-                        sx={{
-                          ":hover": {
-                            backgroundColor: "red",
-                          },
-                        }}
-                      >
-                        <DeleteIcon />
-                    </IconButton>
+                      <Grid container lg={12} direction="column" justifyContent="left" pl={3} pb={3} pr={3}>
+                          <Typography variant="h5" sx={{ textAlign: "left" }}>
+                            {"title"}
+                          </Typography>
+                          <Typography variant="subtitle2" sx={{ textAlign: "left" }}>
+                            Applied Time  
+                          </Typography>
+                          <Typography variant="subtitle2" sx={{ textAlign: "left" , color:"", marginBottom:1}}>
+                            Pending  
+                          </Typography>  
+                          <Button variant="contained" sx={{textTransform: "none"}}>
+                            Remove Application
+                          </Button>                    
+                      </Grid>
                   </Box>
-              </Card>
-            </AccordionDetails>
-          </Accordion>
 
-          {/* Posted Jobs */}
-          <Accordion sx={{ boxShadow: "0 4px 8px #4A4A4A", border: "1px solid #0069c4"}}>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel2-content"
-              id="panel2-header"
-            >
-              Posted Jobs 11
-            </AccordionSummary>
-
-            <AccordionDetails>
-              {/* jobs */}
-              <Card
-                sx={{
-                  display: "flex",
-                  flexDirection: "row",
-                  backgroundColor: "#1769aa",
-                  color: "white",
-                  marginBottom: "20px",
-                }}
-              >
-                <Box>
-                  <CardMedia
-                    component="img"
-                    sx={{
-                      width: 151,
-                      height: 110,
-                      marginLeft: "20px",
-                      marginTop: "25px",
-                      borderRadius: 2,
-                    }}
-                    image={"/"}
-                    alt="Live from space album cover"
-                  />
-                </Box>
-
-                <Box fullwidth sx={{ display: "flex", flexDirection: "column",width:"90%" }}>
-                  <CardContent sx={{ marginLeft: "20px" }}>
-                    <Typography variant="h5" sx={{ textAlign: "left" }}>
-                      {"title"}
-                    </Typography>
-                    <Typography variant="subtitle2" sx={{ textAlign: "left" }}>
-                      Posted Time  
-                    </Typography>
-                  </CardContent>
-                </Box>
-
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    marginTop: "25px",
-                    marginLeft: "40%",
-                    marginRight: "1%",
-                  }}
-                >
                   
-                  <Button
-                    sx={{
-                      size: "large",
-                      textTransform: "none",
-                      textAlign: "left",
-                      color: "white",
-                      pt:-2
-                    }}
-                    
-                    onClick={handleApplicants}
-                  >
-                    Applicants 10
-                  </Button>
+                </Grid>
+              </AccordionDetails>
+            </Accordion>
+          </Box>
 
-                  <Stack direction="row" marginTop={0.2} marginLeft={1}>
-                    <IconButton
-                      color="inherit"
-                      sx={{
-                        ":hover": {
-                          backgroundColor: "green",
-                        },
-                      }}
-                      // onClick={() => onComplete(job)}
-                    >
-                      <CheckCircleIcon />
-                    </IconButton>
-                    <IconButton
-                      color="inherit"
-                      sx={{
-                        ":hover": {
-                          backgroundColor: "red",
-                        },
-                      }}
-                      // onClick={() => onDelete(job.id)}
-                    >
-                      <DeleteIcon />
-                    </IconButton>
-                  </Stack>
-                </Box>
-              </Card>
+          <Box 
+            sx={{fontSize: "14px",borderRadius: "6px", border:"1px solid rgba(0, 0, 0, 0.12)"}}
+            marginLeft={2}
+            marginBottom={2}
+          >
+            <Accordion sx={{ boxShadow: "0 4px 8px #4A4A4A", border: "1px solid #0069c4"}}>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel2-content"
+                id="panel2-header"
+              >
+                Posted Jobs 11
+              </AccordionSummary>
 
-              {/* applicants */}
-              {isVisibleApplicants &&
-                  ApplicantData.map((applicant) => (
-                    <AllApplicant
-                      key={applicant.id}
-                      applicant={applicant}
-                      onCloseApplicants={closeApplicants}
-                    />
-              ))}
-            </AccordionDetails>
-          </Accordion>
+              <AccordionDetails>
+              <Grid container lg={12} md={12} sm={12} xs={12}>
+                  <Box
+                      sx={{fontSize: "14px",borderRadius: "6px", border:"1px solid rgba(0, 0, 0, 0.12)"}}
+                      marginLeft={2}
+                      marginBottom={2}
+                      width={250}
+                    >
+                      <Grid container lg={12} justifyContent="center" p={2}>
+                        <img
+                          // src={`http://localhost:5000/posts/uploads/${img}`}
+                          src={"/assets/jobs/stockCounting.jpg"}
+                          alt={"title"}
+                          style={{ width:"200px", height:"150px"  }}
+                        />
+                      </Grid>
+
+                      <Grid container lg={12} direction="column" justifyContent="left" pl={3} pb={3} pr={3}>
+                          <Typography variant="h5" sx={{ textAlign: "left" }}>
+                            {"title"}
+                          </Typography>
+                          <Typography variant="subtitle2" sx={{ textAlign: "left" }}>
+                            Posted Time 
+                          </Typography>
+                          <Typography variant="subtitle2" sx={{ textAlign: "left", marginBottom:2 }} onClick={handleApplicants}>
+                            Applicants 10
+                          </Typography>
+                          <Button variant="contained" sx={{textTransform: "none"}}>
+                            Remove Job
+                          </Button>                  
+                      </Grid>
+                  </Box>
+                </Grid>
+
+                {isVisibleApplicants &&
+                    ApplicantData.map((applicant) => (
+                      <AllApplicant
+                        key={applicant.id}
+                        applicant={applicant}
+                        onCloseApplicants={closeApplicants}
+                      />
+                ))}
+              </AccordionDetails>
+            </Accordion>           
+          </Box>
         </div>
     </div>
   )

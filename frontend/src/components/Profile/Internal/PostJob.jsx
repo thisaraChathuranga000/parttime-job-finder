@@ -88,28 +88,9 @@ function PostJob(props) {
   };
 
   return (
-    <div style={{ width: "97%", marginBottom: "30px", marginTop: "-25" }}>
-
-          <Card sx={{boxShadow: "0 4px 8px #4A4A4A",border: "1px solid #0069c4",}}>
-            <CardContent sx={{ flex: "1 0 auto", textAlign: "left", margin: "2%" }}>
-              <Typography component="div" variant="h4" align="left">Post a Job</Typography>
-
-              <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">Gender</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    label="Gender"
-                    value={formData.category}
-                    onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                  >
-                    <MenuItem value="Acounting & finance">Acounting & finance</MenuItem>
-                    <MenuItem value="Sales & Marketing">Sales & Marketing</MenuItem>
-                    <MenuItem value="IT & Digital media">IT & Digital media</MenuItem>
-                    <MenuItem value="Labour">Labour</MenuItem>
-                    <MenuItem value="Other">Other</MenuItem>
-                  </Select>
-                </FormControl>
+    <div>
+          <Box sx={{boxShadow: "0 4px 8px #4A4A4A",border: "1px solid #0069c4", marginLeft:2, borderRadius: "6px",}} p={3} marginBottom={2} xs={{sx:{marginLeft:0}}}>
+              <Typography component="div" variant="h4" align="left" pb={2}>Post a Job</Typography>
 
               <TextField
                 label="Title"
@@ -121,7 +102,6 @@ function PostJob(props) {
                 onChange={handleInputChange}
               />
 
-             
               <TextField
                 id="outlined-multiline-static"
                 label="Discription"
@@ -134,7 +114,6 @@ function PostJob(props) {
                 onChange={handleInputChange}
               />
 
-             
               <TextField
                 type="file"
                 inputProps={{ accept: "image/*" }}
@@ -167,57 +146,16 @@ function PostJob(props) {
                 onChange={handleInputChange}
               />
 
-            
-               <Grid container direction="row" justifyContent="flex-start" alignItems="flex-start" fullWidth spacing={2}>
-                <Grid lg={3} md={6} xs={12}>
-                  <TextField
-                    id="start-date"
-                    helperText="Starting Date"
-                    type="date"
-                    onChange={(e) => setFormData({ ...formData, start_data: e.target.value })}
-                    fullWidth
-                    required
-                    value={formData.start_data}
-                  />
-                </Grid>
-                 
-                <Grid lg={3} md={6} xs={12}>
-                  <TextField
-                    id="end-date"
-                    helperText="End Date"
-                    type="date"
-                    onChange={(e) => setFormData({ ...formData, end_data: e.target.value })}
-                    fullWidth
-                    required
-                    value={formData.end_data}
-                  />
-                </Grid>
-             
-                <Grid lg={3} md={6} xs={12}>
-                  <TextField
-                    id="start-time"
-                    helperText="Starting Time"
-                    type="time"
-                    onChange={(e) => setFormData({ ...formData, start_time: e.target.value })}
-                    fullWidth
-                    required
-                    value={formData.start_time}
-                  />
-                </Grid>
-               
-                <Grid lg={3} md={6} xs={12}>
-                  <TextField
-                    id="end-time"
-                    helperText="End Time"
-                    type="time"
-                    onChange={(e) => setFormData({ ...formData, end_time: e.target.value })}
-                    fullWidth
-                    required
-                    value={formData.end_time}
-                  />
-                </Grid>
-              </Grid>
-               
+              <TextField
+                id="start-date"
+                helperText="Starting Date and time"
+                type="date"
+                onChange={(e) => setFormData({ ...formData, start_data: e.target.value })}
+                fullWidth
+                required
+                value={formData.start_data}
+              />
+          
               <TextField
                 label="Payment"
                 variant="outlined"
@@ -263,12 +201,12 @@ function PostJob(props) {
                   </Box>
                 </Fade>
               </Modal>
+
               <Button variant="outlined" onClick={props.onDiscardJob}>
                 Discard job
               </Button>
             </Stack>
-            </CardContent>
-          </Card>
+          </Box>
      
     </div>
   );

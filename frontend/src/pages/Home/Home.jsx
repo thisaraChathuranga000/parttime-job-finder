@@ -14,7 +14,7 @@ function Home() {
           <Sidebar/>
         </Grid>
         
-        <Grid container lg={9} md={9} sm={12} xs={12} justifyContent="center">
+        <Grid container lg={9} md={9} sm={12} xs={12}>
           {postData.map((post) => (
             <Post key={post._id} post={post} />
           ))}
