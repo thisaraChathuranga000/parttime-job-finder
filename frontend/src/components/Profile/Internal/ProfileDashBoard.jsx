@@ -5,9 +5,10 @@ import { ApplicantData } from "../../../dummyApplicantData";
 import AllApplicant from "./AllApplicant";
 import AppliedJobs from './AppliedJobs';
 import PostedJobs from './PostedJobs';
+import ModelLayout from '../../../Layouts/ModelLayout';
 
 function ProfileDashBoard() {
-  const [isPostJobVisible, setPostJobVisible] = useState(true);
+  const [isPostJobVisible, setPostJobVisible] = useState(false);
   const [isAllJobVisible, setAllJobVisible] = useState(false)
   const [isVisibleApplicants, setIsVisibleApplicants] = useState(false);
 
@@ -24,15 +25,17 @@ function ProfileDashBoard() {
 
       <AppliedJobs/> 
       <PostedJobs onclick={handleApplicants}/>
+
+      <ModelLayout open={isVisibleApplicants} onclose={closeApplicants}>
+        {ApplicantData.map((applicant) => (
+            <AllApplicant
+              key={applicant.id}
+              applicant={applicant}
+            />
+        ))}
+      </ModelLayout>
           
-      {isVisibleApplicants &&
-        ApplicantData.map((applicant) => (
-          <AllApplicant
-            key={applicant.id}
-            applicant={applicant}
-            onCloseApplicants={closeApplicants}
-          />
-      ))}
+      
     </div>
   )
 }

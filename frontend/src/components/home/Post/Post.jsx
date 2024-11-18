@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Grid from '@mui/material/Grid';
-import PostModel from "../../Layouts/PostModel";
+import ModelLayout from "../../../Layouts/ModelLayout";
 
 function Post({ post }) {
   const {company,title,description,payment,image,date,location} = post;
@@ -34,7 +34,7 @@ function Post({ post }) {
               // src={`http://localhost:5000/posts/uploads/${img}`}
               src={image}
               alt={title}
-              style={{ width:"250px", height:"200px"  }}
+              style={{ width:"250px", height:"200px" }}
             />
           </Grid>
 
@@ -48,7 +48,7 @@ function Post({ post }) {
           </Grid>
         </Box>
 
-        <PostModel open={openSeeMore} onclose={handleCloseSeeMore}>
+        <ModelLayout open={openSeeMore} onclose={handleCloseSeeMore}>
           <CardContent marginBottom="50px">
             <Typography component="div" variant="h4" align="left">{title}</Typography>
             <Typography variant="subtitle1" component="h4">{company}</Typography>
@@ -61,9 +61,9 @@ function Post({ post }) {
           <Stack spacing={2} direction="row" marginLeft={2} marginBottom={3}>
             <Button variant="contained" onClick={handleOpenApplyPost}>Apply for job</Button>
           </Stack>
-        </PostModel>
+        </ModelLayout>
 
-        <PostModel open={openApplyPost} onclose={handleCloseApplyPost}>
+        <ModelLayout open={openApplyPost} onclose={handleCloseApplyPost}>
           <Typography sx={{ mt: 2, paddingBottom: 2 }}>
             You have successfully applied for this job
           </Typography>
@@ -71,7 +71,7 @@ function Post({ post }) {
           <Button variant="contained" sx={{ borderRadius: 10, textTransform: "none" }}>
             Go to your profile
           </Button>
-        </PostModel>
+        </ModelLayout>
     </div>
   );
 }

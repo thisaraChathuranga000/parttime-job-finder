@@ -6,9 +6,9 @@ import Grid from '@mui/material/Grid';
 function JobCardLayout({ children, img, actionName }){
     return(
         <Box
-            sx={{fontSize: "14px",borderRadius: "6px", border:"1px solid rgba(0, 0, 0, 0.12)"}}
-            marginLeft={2}
+            sx={{fontSize: "14px",borderRadius: "6px", border:"1px solid rgba(0, 0, 0, 0.12)"}} 
             marginBottom={2}
+            marginLeft={2}
             width={250}
         >
             <Grid container lg={12} justifyContent="center" p={2}>

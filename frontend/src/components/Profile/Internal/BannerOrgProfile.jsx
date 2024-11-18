@@ -19,6 +19,7 @@ function BannerOrgProfile(props) {
           flexDirection="row"
           marginLeft={2}
           marginBottom={2}
+          p={0}
         >
           <Grid container lg={6} class="displayNone">
             <img

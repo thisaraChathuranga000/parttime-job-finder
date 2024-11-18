@@ -9,7 +9,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import BoxLayout from '../../Layouts/BoxLayout';
+import BoxLayout from '../../../Layouts/BoxLayout';
   
 const timeOfPost = [`All time`,`Last 24 hours`,`Last 3 days`,`Last 7 days`];
 

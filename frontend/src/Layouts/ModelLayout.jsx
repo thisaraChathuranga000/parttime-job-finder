@@ -12,9 +12,11 @@ const style = {
     bgcolor: "background.paper",
     boxShadow: 24,
     p: 4,
+    maxHeight: '80vh',
+    overflowY: 'auto',
 };
 
-function PostModel({children, open, onclose}){
+function ModelLayout({children, open, onclose}){
     return(
         <Modal
           open={open}
@@ -22,7 +24,6 @@ function PostModel({children, open, onclose}){
           closeAfterTransition
           slots={{ backdrop: Backdrop }}
           slotProps={{backdrop:{timeout: 500}}}
-          style={{overflow:"scroll"}}
         >
             <Fade in={open}>
                 <Card sx={style}>
@@ -33,4 +34,4 @@ function PostModel({children, open, onclose}){
     );
 }
 
-export default PostModel;
+export default ModelLayout;

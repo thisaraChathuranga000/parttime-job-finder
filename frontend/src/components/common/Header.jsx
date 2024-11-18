@@ -15,12 +15,18 @@ import { useState } from "react";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
+  const navigate = useNavigate();
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleClick = () => {
+    navigate('/');
   };
   return (
     <div>
@@ -28,9 +34,9 @@ function Header() {
         <AppBar
           position="fixed"
           sx={{
-            backgroundColor: "white",
+            backgroundColor: "#F3F8FF",
             minHeight: 20,
-            borderBottom: "1px solid gray",
+            borderBottom: "1px solid #DFD0B8",
             boxShadow: "none",
           }}
         >
@@ -51,9 +57,8 @@ function Header() {
                 variant="h6"
                 noWrap
                 color="primary"
-                sx={{ display: { xs: "none", sm: "block" } }}
-                component={Link}
-                to="/"
+                sx={{ display: { xs: "none", sm: "block" }}}
+                onClick={handleClick}
               >
                 Parttimez
               </Typography>

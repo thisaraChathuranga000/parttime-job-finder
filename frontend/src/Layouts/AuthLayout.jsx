@@ -1,6 +1,5 @@
 import React from 'react';
 import { Grid } from '@mui/material';
-import Footer from '../common/Footer';
 
 const AuthLayout = ({ children }) => {
   return (
@@ -16,7 +15,6 @@ const AuthLayout = ({ children }) => {
         >
             {children}
         </Grid>
-        <Footer />
     </div>
     
   );

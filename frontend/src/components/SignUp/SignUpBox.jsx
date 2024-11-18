@@ -1,12 +1,9 @@
 import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import FormBox from "../Layouts/FormBox";
+import FormBox from "../../Layouts/FormBox";
 
 function SignUpBox() {
   const [step, setStep] = useState(1);
@@ -61,7 +58,7 @@ function SignUpBox() {
                 </Button>
 
                 <Typography variant="body2" align="center" sx={{ pt: 2 }}>
-                  Allready Have an account?{" "}
+                  Already Have an account?{" "}
                   <Link href="/login" color="primary">Log in</Link>
                 </Typography>
               </div>
@@ -110,7 +107,6 @@ function SignUpBox() {
                 </Button>
               </div>
             )}
-
       </FormBox>
     </div>
   );
