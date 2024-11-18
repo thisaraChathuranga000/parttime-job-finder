@@ -102,8 +102,8 @@ function SignUpBox() {
                   variant="outlined"
                 />
 
-              <Button type="submit" variant="contained" color="primary" fullWidth onClick={handleSubmit}>
-                  Submit
+                <Button type="submit" variant="contained" color="primary" fullWidth onClick={handleSubmit}>
+                    Submit
                 </Button>
               </div>
             )}

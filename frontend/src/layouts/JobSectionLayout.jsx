@@ -18,6 +18,7 @@ function JobSectionLayout({children, accordionTitle, count}){
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel2-content"
                     id="panel2-header"
+                    sx={{fontSize:"16px", fontWeight:"400"}}
                 >
                     {accordionTitle} {""} {count}
                 </AccordionSummary>

@@ -4,6 +4,10 @@
   }
 }
 
+.App{
+  min-height: "100vh";
+}
+
 /* .sidebar {
   flex: 3;
   height: calc(100vh - 50px);

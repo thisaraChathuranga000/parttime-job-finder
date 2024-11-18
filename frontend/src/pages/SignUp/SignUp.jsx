@@ -2,6 +2,7 @@ import React from "react";
 import SignUpBox from "../../components/SignUp/SignUpBox";
 import {Grid} from '@mui/material';
 import AuthLayout from "../../layouts/AuthLayout";
+import { IMAGE_PATHS } from "../../constants";
 
 function SignUp() {
   return (
@@ -11,7 +12,7 @@ function SignUp() {
       </Grid>
 
       <Grid container lg={6} md={4} justifyContent="center" class="displayNone">
-        <img src="assets/signup.png" alt="login"/>
+        <img src={IMAGE_PATHS.SIGNUP} alt="login"/>
       </Grid>      
     </AuthLayout>
   );

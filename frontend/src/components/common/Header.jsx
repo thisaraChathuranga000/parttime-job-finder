@@ -26,7 +26,7 @@ function Header() {
   };
 
   const handleClick = () => {
-    navigate('/');
+    navigate("");
   };
   return (
     <div>
