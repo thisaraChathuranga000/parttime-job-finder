@@ -11,14 +11,20 @@ function ProfileBar() {
       <BoxLayout>
         <div style={{ marginLeft: "10px" }}>
           <h3>Your Profile</h3>
-          
+
           <Avatar
             alt=""
             src="assets/Companies/logo (3).jpg"
             sx={{ width: 170, height: 170, border: "1px solid blue" }}
           />
 
-          <Stack direction="row" spacing={0} marginTop={2} marginBottom={4} margin={3}>
+          <Stack
+            direction="row"
+            spacing={0}
+            marginTop={2}
+            marginBottom={4}
+            margin={3}
+          >
             <StarRateIcon style={{ color: "#e89705" }} />
             <StarRateIcon style={{ color: "#e89705" }} />
             <StarRateIcon style={{ color: "#e89705" }} />
@@ -26,10 +32,14 @@ function ProfileBar() {
             <StarRateIcon style={{ color: "#e89705" }} />
           </Stack>
 
-          <p>Name</p><input type="text"  style={{ width: "90%" }} />
-          <p>Email</p><input type="text"  style={{ width: "90%" }} />
-          <p>Contact</p><input type="text"  style={{ width: "90%" }} />
-          <p>Address</p><input type="text" style={{ width: "90%" }} />
+          <p>Name</p>
+          <input type="text" style={{ width: "90%" }} />
+          <p>Email</p>
+          <input type="text" style={{ width: "90%" }} />
+          <p>Contact</p>
+          <input type="text" style={{ width: "90%" }} />
+          <p>Address</p>
+          <input type="text" style={{ width: "90%" }} />
         </div>
 
         <Button

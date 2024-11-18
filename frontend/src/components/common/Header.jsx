@@ -15,7 +15,7 @@ import { useState } from "react";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { Link } from "react-router-dom";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -41,27 +41,27 @@ function Header() {
           }}
         >
           <Toolbar>
-              <IconButton
-                size="extra-large"
-                edge="start"
-                color="primary"
-                aria-label="open drawer"
-                sx={{ mr: 1 }}
-                component={Link}
-                to="/"
-              >
-                <PanoramaFishEyeIcon />
-              </IconButton>
+            <IconButton
+              size="extra-large"
+              edge="start"
+              color="primary"
+              aria-label="open drawer"
+              sx={{ mr: 1 }}
+              component={Link}
+              to="/"
+            >
+              <PanoramaFishEyeIcon />
+            </IconButton>
 
-              <Typography
-                variant="h6"
-                noWrap
-                color="primary"
-                sx={{ display: { xs: "none", sm: "block" }}}
-                onClick={handleClick}
-              >
-                Parttimez
-              </Typography>
+            <Typography
+              variant="h6"
+              noWrap
+              color="primary"
+              sx={{ display: { xs: "none", sm: "block" } }}
+              onClick={handleClick}
+            >
+              Parttimez
+            </Typography>
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
               <Stack spacing={2} direction="row" marginTop={1} marginRight={1}>

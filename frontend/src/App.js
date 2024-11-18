@@ -15,12 +15,12 @@ function App() {
       <Header />
       <Routes>
         <Route path={APP_ROUTES.HOME} element={<Home />} />
-        <Route path={APP_ROUTES.INTERNAL_PROFILE} element={<Internal/>} />
-        <Route path={APP_ROUTES.EXTERNAL_PROFILE} element={<External/>} />
+        <Route path={APP_ROUTES.INTERNAL_PROFILE} element={<Internal />} />
+        <Route path={APP_ROUTES.EXTERNAL_PROFILE} element={<External />} />
         <Route path={APP_ROUTES.LOGIN} element={<Login />} />
         <Route path={APP_ROUTES.SIGNUP} element={<SignUp />} />
       </Routes>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

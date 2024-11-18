@@ -17,14 +17,13 @@ function PostJob(props) {
     title: "",
     description: "",
     location: "",
-    start_data:"",
-    end_data:"",
-    start_time:"",
-    end_time:"",
-    payment:"",
-    city:""
+    start_data: "",
+    end_data: "",
+    start_time: "",
+    end_time: "",
+    payment: "",
+    city: "",
   });
-
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -36,12 +35,17 @@ function PostJob(props) {
     setOpen(true);
     console.log(formData);
     const formDataToSend = new FormData();
-    for (const key in formData) {formDataToSend.append(key, formData[key])}
-    if (selectedImage) {formDataToSend.append("file", selectedImage)}
+    for (const key in formData) {
+      formDataToSend.append(key, formData[key]);
+    }
+    if (selectedImage) {
+      formDataToSend.append("file", selectedImage);
+    }
 
-    axios.post("http://localhost:5000/posts", formDataToSend)
-    .then((response) => console.log(response.data))
-    .catch((error) => console.error(error))
+    axios
+      .post("http://localhost:5000/posts", formDataToSend)
+      .then((response) => console.log(response.data))
+      .catch((error) => console.error(error));
   };
 
   const handleClose = () => setOpen(false);
@@ -55,109 +59,125 @@ function PostJob(props) {
 
   return (
     <div>
-          <Box 
-            sx={{boxShadow: "0 4px 8px #4A4A4A",border: "1px solid #0069c4", marginLeft:2, borderRadius: "6px"}} 
-            p={3} 
-            marginBottom={2} 
-            xs={{sx:{marginLeft:0}}}
+      <Box
+        sx={{
+          boxShadow: "0 4px 8px #4A4A4A",
+          border: "1px solid #0069c4",
+          marginLeft: 2,
+          borderRadius: "6px",
+        }}
+        p={3}
+        marginBottom={2}
+        xs={{ sx: { marginLeft: 0 } }}
+      >
+        <Typography component="div" variant="h4" align="left" pb={2}>
+          Post a Job
+        </Typography>
+
+        <TextField
+          label="Title"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          sx={{ marginBottom: "20px" }}
+          name="title"
+          onChange={handleInputChange}
+        />
+
+        <TextField
+          id="outlined-multiline-static"
+          label="Description"
+          multiline
+          rows={4}
+          sx={{ marginBottom: "20px" }}
+          fullWidth
+          required
+          name="description"
+          onChange={handleInputChange}
+        />
+
+        <TextField
+          type="file"
+          inputProps={{ accept: "image/*" }}
+          onChange={handleImageChange}
+          variant="outlined"
+          sx={{ marginBottom: "20px" }}
+          helperText="Upload a suitable image here"
+          required
+          fullWidth
+          name="file"
+        />
+
+        <TextField
+          label="Location"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          sx={{ marginBottom: "20px" }}
+          name="location"
+          onChange={handleInputChange}
+        />
+
+        <TextField
+          label="City"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          sx={{ marginBottom: "20px" }}
+          name="city"
+          onChange={handleInputChange}
+        />
+
+        <TextField
+          id="start-date"
+          helperText="Starting Date and time"
+          type="date"
+          onChange={(e) =>
+            setFormData({ ...formData, start_data: e.target.value })
+          }
+          fullWidth
+          required
+          value={formData.start_data}
+        />
+
+        <TextField
+          label="Payment"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          sx={{ marginBottom: "20px" }}
+          name="payment"
+          onChange={handleInputChange}
+        />
+
+        <Stack spacing={2} direction="row">
+          <Button
+            variant="contained"
+            disableElevation
+            onClick={handleOpen}
+            type="submit"
           >
-              <Typography component="div" variant="h4" align="left" pb={2}>Post a Job</Typography>
+            Post Job
+          </Button>
 
-              <TextField
-                label="Title"
-                variant="outlined"
-                fullWidth
-                margin="normal"
-                sx={{ marginBottom: "20px" }}
-                name="title"
-                onChange={handleInputChange}
-              />
+          <ModelLayout open={open} onclose={handleClose}>
+            <Typography sx={{ mt: 2, paddingBottom: 2 }}>
+              You have successfully posted the job
+            </Typography>
 
-              <TextField
-                id="outlined-multiline-static"
-                label="Description"
-                multiline
-                rows={4}
-                sx={{ marginBottom: "20px" }}
-                fullWidth
-                required
-                name="description"
-                onChange={handleInputChange}
-              />
+            <Button
+              variant="contained"
+              sx={{ borderRadius: 10, textTransform: "none" }}
+            >
+              See your Post
+            </Button>
+          </ModelLayout>
 
-              <TextField
-                type="file"
-                inputProps={{ accept: "image/*" }}
-                onChange={handleImageChange}
-                variant="outlined"
-                sx={{  marginBottom: "20px" }}
-                helperText="Upload a suitable image here"
-                required
-                fullWidth
-                name="file"
-              />
-
-              <TextField
-                label="Location"
-                variant="outlined"
-                fullWidth
-                margin="normal"
-                sx={{  marginBottom: "20px" }}
-                name="location"
-                onChange={handleInputChange}
-              />
-
-              <TextField
-                label="City"
-                variant="outlined"
-                fullWidth
-                margin="normal"
-                sx={{  marginBottom: "20px" }}
-                name="city"
-                onChange={handleInputChange}
-              />
-
-              <TextField
-                id="start-date"
-                helperText="Starting Date and time"
-                type="date"
-                onChange={(e) => setFormData({ ...formData, start_data: e.target.value })}
-                fullWidth
-                required
-                value={formData.start_data}
-              />
-          
-              <TextField
-                label="Payment"
-                variant="outlined"
-                fullWidth
-                margin="normal"
-                sx={{  marginBottom: "20px" }}
-                name="payment"
-                onChange={handleInputChange}
-              />
-
-            <Stack spacing={2} direction="row">
-              <Button variant="contained" disableElevation onClick={handleOpen} type="submit">
-                Post Job
-              </Button>
-
-              <ModelLayout open={open} onclose={handleClose}>
-                <Typography sx={{ mt: 2, paddingBottom: 2 }}>
-                  You have successfully posted the job
-                </Typography>
-
-                <Button variant="contained" sx={{ borderRadius: 10, textTransform: "none" }}>
-                  See your Post
-                </Button>
-              </ModelLayout>
-
-              <Button variant="outlined" onClick={props.onDiscardJob}>
-                Discard job
-              </Button>
-            </Stack>
-          </Box>
-     
+          <Button variant="outlined" onClick={props.onDiscardJob}>
+            Discard job
+          </Button>
+        </Stack>
+      </Box>
     </div>
   );
 }

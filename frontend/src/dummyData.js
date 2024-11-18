@@ -1,7 +1,7 @@
 export const postData = [
   {
     id: 1,
-    image : "/assets/jobs/stockCounting.jpg",
+    image: "/assets/jobs/stockCounting.jpg",
     company: "MAS Holdings",
     title: "Stock Counting",
     location: "BOI Zone, Katunayake",
@@ -34,7 +34,7 @@ export const postData = [
   },
   {
     id: 1,
-    image : "/assets/jobs/stockCounting.jpg",
+    image: "/assets/jobs/stockCounting.jpg",
     company: "MAS Holdings",
     title: "Stock Counting",
     location: "BOI Zone, Katunayake",
@@ -64,5 +64,5 @@ export const postData = [
     payment: 5000,
     description:
       "In some instances, a student may feel that he/she has sufficient knowledge in a certain subject area and does not wish to take the particular subject course. In such cases, the student may request to take a CLEP Examination in the particular subject area(s). To receive credit for the particular corresponding offered course, the student must obtain a score at or above the respective score listed on the Credit by Exam table.",
-  }
+  },
 ];

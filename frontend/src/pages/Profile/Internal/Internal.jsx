@@ -1,22 +1,22 @@
-import React from 'react'
-import ProfileBar from '../../../components/Profile/Internal/ProfileBar'
-import ProfileDashBoard from '../../../components/Profile/Internal/ProfileDashBoard'
-import Grid from '@mui/material/Grid';
+import React from "react";
+import ProfileBar from "../../../components/Profile/Internal/ProfileBar";
+import ProfileDashBoard from "../../../components/Profile/Internal/ProfileDashBoard";
+import Grid from "@mui/material/Grid";
 
 function Internal() {
   return (
     <div>
       <Grid container p={4}>
         <Grid lg={3} md={3} sm={12} xs={12}>
-          <ProfileBar/>
+          <ProfileBar />
         </Grid>
 
         <Grid container lg={9} md={9} sm={12} xs={12} justifyContent="center">
-          <ProfileDashBoard/>
+          <ProfileDashBoard />
         </Grid>
       </Grid>
     </div>
-  )
+  );
 }
 
-export default Internal 
+export default Internal;

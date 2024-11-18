@@ -10,7 +10,7 @@ export const jobData = [
     postedTime: "18:36 PM",
     postedDate: "23/04/2023",
     noOfApplicants: 26,
-    company: "MAS Holdings"
+    company: "MAS Holdings",
   },
   {
     id: 2,
@@ -23,7 +23,7 @@ export const jobData = [
     postedTime: "17:40 PM",
     postedDate: "24/04/2023",
     noOfApplicants: 31,
-    company: "Hemas"
+    company: "Hemas",
   },
   {
     id: 3,
@@ -36,8 +36,6 @@ export const jobData = [
     postedTime: "17:40 PM",
     postedDate: "24/04/2023",
     noOfApplicants: 40,
-    company: "MAS Holdings"
+    company: "MAS Holdings",
   },
- 
- 
 ];
