@@ -9,7 +9,6 @@ const AuthLayout = ({ children }) => {
             sx={{
                 backgroundImage: "url('assets/BG-15.png')",
                 boxShadow: "none",
-                marginTop: 0,
             }}
             pt={2}
         >

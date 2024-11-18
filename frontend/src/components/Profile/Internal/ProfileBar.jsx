@@ -3,7 +3,7 @@ import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import StarRateIcon from "@mui/icons-material/StarRate";
-import BoxLayout from "../../../layouts/BoxLayout";
+import BoxLayout from "../../common/layouts/BoxLayout";
 
 function ProfileBar() {
   return (
