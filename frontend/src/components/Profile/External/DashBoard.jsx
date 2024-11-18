@@ -1,6 +1,6 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
-import JobCardLayout from '../../../Layouts/JobCardLayout';
+import JobCardLayout from '../../../layouts/JobCardLayout';
 
 function DashBoard() {
     return (

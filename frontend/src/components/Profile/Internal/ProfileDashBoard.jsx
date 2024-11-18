@@ -5,7 +5,7 @@ import { ApplicantData } from "../../../dummyApplicantData";
 import AllApplicant from "./AllApplicant";
 import AppliedJobs from './AppliedJobs';
 import PostedJobs from './PostedJobs';
-import ModelLayout from '../../../Layouts/ModelLayout';
+import ModelLayout from '../../../layouts/ModelLayout';
 
 function ProfileDashBoard() {
   const [isPostJobVisible, setPostJobVisible] = useState(false);

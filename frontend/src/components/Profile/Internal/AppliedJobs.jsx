@@ -1,7 +1,7 @@
 import React from 'react';
 import Typography from "@mui/material/Typography";
-import JobSectionLayout from '../../../Layouts/JobSectionLayout';
-import JobCardLayout from '../../../Layouts/JobCardLayout';
+import JobSectionLayout from '../../../layouts/JobSectionLayout';
+import JobCardLayout from '../../../layouts/JobCardLayout';
 
 function AppliedJobs(){
     return(

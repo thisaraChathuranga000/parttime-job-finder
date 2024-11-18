@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 import { useState } from "react";
 import Box from "@mui/material/Box";
 import axios from "axios";
-import ModelLayout from "../../../Layouts/ModelLayout";
+import ModelLayout from "../../../layouts/ModelLayout";
 
 function PostJob(props) {
   const [selectedImage, setSelectedImage] = useState(null);

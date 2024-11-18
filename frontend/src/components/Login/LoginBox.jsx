@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
-import FormBox from "../../Layouts/FormBox";
+import FormBox from "../../layouts/FormBox";
 
 function LoginBox() {
   const [email, setEmail] = useState("");

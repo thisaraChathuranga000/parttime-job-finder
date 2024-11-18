@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Grid from '@mui/material/Grid';
-import ModelLayout from "../../../Layouts/ModelLayout";
+import ModelLayout from "../../../layouts/ModelLayout";
 
 function Post({ post }) {
   const {company,title,description,payment,image,date,location} = post;

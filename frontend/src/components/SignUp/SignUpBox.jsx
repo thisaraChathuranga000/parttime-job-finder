@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import FormBox from "../../Layouts/FormBox";
+import FormBox from "../../layouts/FormBox";
 
 function SignUpBox() {
   const [step, setStep] = useState(1);

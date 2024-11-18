@@ -2,7 +2,7 @@ import React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import StarRateIcon from "@mui/icons-material/StarRate";
-import BoxLayout from "../../../Layouts/BoxLayout";
+import BoxLayout from "../../../layouts/BoxLayout";
 import Grid from '@mui/material/Grid';
 
 function ProfileBar() {

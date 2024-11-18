@@ -1,7 +1,7 @@
 import * as React from "react";
 import LoginBox from "../../components/Login/LoginBox";
 import {Grid} from '@mui/material';
-import AuthLayout from "../../Layouts/AuthLayout";
+import AuthLayout from "../../layouts/AuthLayout";
 
 function Login() {
   return (
