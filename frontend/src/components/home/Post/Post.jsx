@@ -6,11 +6,14 @@ import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import ModelLayout from "../../../layouts/ModelLayout";
+import AllApplicant from "../../Profile/Internal/AllApplicant";
+import { ApplicantData } from "../../../dummyApplicantData";
 
 function Post({ post }) {
   const { company, title, description, payment, image, date, location } = post;
   const [openApplyPost, setOpenApplyPost] = useState(false);
   const [openSeeMore, setOpenSeeMore] = useState(false);
+  const [isVisibleApplicants, setIsVisibleApplicants] = useState(false);
 
   const handleCloseApplyPost = () => setOpenApplyPost(false);
   const handleOpenSeeMore = () => setOpenSeeMore(true);
@@ -19,6 +22,14 @@ function Post({ post }) {
   const handleOpenApplyPost = () => {
     setOpenSeeMore(false);
     setOpenApplyPost(true);
+  };
+
+  const handleApplicants = () => {
+    setIsVisibleApplicants(true);
+  };
+
+  const closeApplicants = () => {
+    setIsVisibleApplicants(false);
   };
 
   return (
@@ -121,6 +132,15 @@ function Post({ post }) {
           >
             {description}
           </Typography>
+
+          <Typography
+            variant="subtitle2"
+            color="#1976d2"
+            sx={{ textAlign: "left", marginBottom: 2 }}
+            onClick={handleApplicants}
+          >
+            Applicants 10
+          </Typography>
         </CardContent>
 
         <Stack spacing={2} direction="row" marginLeft={2} marginBottom={3}>
@@ -128,6 +148,12 @@ function Post({ post }) {
             Apply for job
           </Button>
         </Stack>
+      </ModelLayout>
+
+      <ModelLayout open={isVisibleApplicants} onclose={closeApplicants}>
+        {ApplicantData.map((applicant) => (
+          <AllApplicant key={applicant.id} applicant={applicant} />
+        ))}
       </ModelLayout>
 
       <ModelLayout open={openApplyPost} onclose={handleCloseApplyPost}>
