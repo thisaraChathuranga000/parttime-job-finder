@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Res, UploadedFile, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
 import { PostsService } from './posts.service';
-import { CreatePostDto } from './dto/CreatePost.dto';
-import { UpdatePostDto } from './dto/UpdatePost.dto';
+import { CreatePostDto } from '../dto/post/CreatePost.dto';
+import { UpdatePostDto } from '../dto/post/UpdatePost.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('posts')

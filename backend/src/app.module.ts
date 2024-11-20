@@ -4,14 +4,13 @@ import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from './users/users.module';
 import { PostsModule } from './posts/posts.module';
-import { ApplicationModule } from './application/application.module';
-import { InvitationsModule } from './invitations/invitations.module';
 import * as dotenv from 'dotenv';
 import { MulterModule } from '@nestjs/platform-express';
+import { AuthModule } from './auth/auth.module';
 dotenv.config();
 
 @Module({
-  imports: [UsersModule, MongooseModule.forRoot(process.env.MONGO_URL), PostsModule, ApplicationModule, InvitationsModule, MulterModule.register({dest: './uploads',})],
+  imports: [UsersModule, MongooseModule.forRoot(process.env.MONGO_URL), PostsModule,AuthModule, MulterModule.register({dest: './uploads',})],
   controllers: [AppController],
   providers: [AppService],
 })

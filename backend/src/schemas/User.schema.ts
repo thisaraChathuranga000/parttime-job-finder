@@ -1,45 +1,31 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { UserType } from './UserType.schema';
-import mongoose from 'mongoose';
+import { Document, Types } from 'mongoose';
 
 @Schema({ timestamps: true })
-export class User{
-    @Prop({unique: true, required: true})
-    email: string;
+export class User extends Document {
+  @Prop({ unique: true, required: true })
+  email: string;
 
-    @Prop({required: true})
-    password: string;
+  @Prop({ required: true })
+  password: string;
 
-    @Prop({required: true})
-    name: string;
+  @Prop({ required: true })
+  name: string;
 
-    @Prop({required: true})
-    contact: string;
+  @Prop({ required: true })
+  contact: string;
 
-    @Prop({required: true})
-    address: string;
+  @Prop({ required: true })
+  address: string;
 
-    @Prop()
-    imgUrl: string;
+  @Prop()
+  imgUrl: string;
 
-    @Prop()
-    uni_name: string;
+  @Prop({ type: [Types.ObjectId], ref: 'Post' })
+  postedJobs: Types.ObjectId[];
 
-    @Prop()
-    res_address: string;
-
-    @Prop()
-    gender: string;
-
-    @Prop()
-    birthday: string;
-
-    @Prop()
-    age: number;
-
-    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'UserType', required: true })
-    type: UserType;
-
+  @Prop({ type: [Types.ObjectId], ref: 'Post' })
+  appliedJobs: Types.ObjectId[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

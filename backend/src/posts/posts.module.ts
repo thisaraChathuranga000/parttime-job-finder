@@ -2,15 +2,15 @@ import { Module } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { PostsController } from './posts.controller';
 import { MongooseModule } from '@nestjs/mongoose';
-import { JobPost, JobPostSchema } from 'src/schemas/Post.schema';
+import { Post, PostSchema } from 'src/schemas/Post.schema';
 import { User, UserSchema } from 'src/schemas/User.schema';
 import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports:[MongooseModule.forFeature([
       {
-        name: JobPost.name,
-        schema: JobPostSchema,
+        name: Post.name,
+        schema: PostSchema,
       },
       {
         name: User.name,

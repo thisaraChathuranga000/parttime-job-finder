@@ -1,59 +1,46 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { forwardRef, Inject, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User } from 'src/schemas/User.schema';
-import { UserType } from 'src/schemas/UserType.schema';
-import { CreateUserDto } from './dto/CreateUser.dto';
-import { UpdateUserDto } from './dto/UpdateUser.dto';
+import { CreateUserDto } from '../dto/user/CreateUser.dto';
+import { UpdateUserDto } from '../dto/user/UpdateUser.dto';
+import { AuthService } from 'src/auth/auth.service';
+
+interface Query{ email:string }
 
 @Injectable()
 export class UsersService {
+    logger: Logger;
     constructor(
-        @InjectModel(User.name) private userModel: Model<User>, 
-        @InjectModel(UserType.name) private userTypeModel: Model<UserType>) 
-    {}
+        @InjectModel(User.name) private userModel: Model<User>,
+        @Inject(forwardRef(() => AuthService))
+        private AuthService: AuthService
+    ) { 
+        this.logger = new Logger(UsersService.name); 
+    }
 
-    async createUser({ type, ...createUserDto }: CreateUserDto) {
-        const newType = new this.userTypeModel(type);
-        const savedNewType = await newType.save();
-        const newUser = new this.userModel({
-            ...createUserDto,
-            type: savedNewType
-        });
+    // async createUser(createUserDto:CreateUserDto): Promise<User> {
+    //     const createdUser = new this.userModel(createUserDto);
+    //     return createdUser.save();
+    // }
+
+    async createUser(user: CreateUserDto): Promise<CreateUserDto> {
+        this.logger.log('Creating user.');
+       
+        const hashedPassword = await this.AuthService.getHashedPassword(
+          user.password
+        );
+        user.password = hashedPassword;
+        const newUser = new this.userModel(user);
         return newUser.save();
     }
-    
 
-    getsUsers() {
-        return this.userModel.find().populate(['type']);
-    }
+    // async findByEmail(email:Query): Promise<User>{
+    //     return await this.userModel.find(email).select('+password');
+    //     //return await this.userModel.findOne(email);
+    // }
 
-    getUserById(id: string) {
-        return this.userModel.findById(id).populate(['type']);
-    }
-
-    async updateUser(id: string, updateUserDto: UpdateUserDto) {
-        const user = await this.userModel.findById(id);
-        if (!user) {
-            throw new NotFoundException('User not found');
-        }
-        if (updateUserDto.type) {
-            const newType = new this.userTypeModel(updateUserDto.type);
-            const savedNewType = await newType.save();
-            updateUserDto.type = savedNewType;
-        }
-        return this.userModel.findByIdAndUpdate(id, updateUserDto, { new: true }).populate(['type']);
-    }
-
-    async deleteUser(id: string){
-        try{
-            const deletedUser = await this.userModel.findByIdAndDelete(id);
-            if(!deletedUser){
-                throw new Error("User Not found")
-            }
-            return deletedUser;
-        } catch (error){
-            throw new Error("Unable to delete User")
-        }
+    async findOne(email: Query): Promise<CreateUserDto> {
+        return await this.userModel.findOne(email).select('+password');
     }
 }
