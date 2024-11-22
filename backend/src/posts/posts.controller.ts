@@ -3,17 +3,27 @@ import { PostsService } from './posts.service';
 import { CreatePostDto } from '../dto/post/CreatePost.dto';
 import { UpdatePostDto } from '../dto/post/UpdatePost.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
+import * as dotenv from 'dotenv';
+import { UsersService } from 'src/users/users.service';
+
+dotenv.config();
 
 @Controller('posts')
 export class PostsController {
-    constructor(private readonly postService:PostsService) {}
+    constructor(
+        private readonly postService:PostsService) {}
 
     @Post()
     @UsePipes(new ValidationPipe())
     @UseInterceptors(FileInterceptor('file'))
     createNewPost(@Body() createPostDto: CreatePostDto, @UploadedFile() file) {
-        if (file) {createPostDto.img = file.filename}
+        if (file) {createPostDto.img = process.env.APPLICATION_DOMAIN + process.env.APPLICATION_PORT +  "/posts/img/" + file.filename}
         return this.postService.createPost(createPostDto)
+    }
+
+    @Get('img/:imgPath')
+    seeUploadedFile(@Param('imgPath') image, @Res() res){
+      return res.sendFile(image, {root: 'uploads/posts'});
     }
 
     @Get('all')
@@ -26,10 +36,7 @@ export class PostsController {
         return this.postService.findAllPosts(id)
     }
 
-    @Get('uploads/:imgpath')
-    seeUploadedFile(@Param('imgpath') image, @Res() res){
-      return res.sendFile(image, {root: 'uploads/posts'});
-    }
+    
 
     @Get(':id')
     async getOnePost(@Param('id') id: string){

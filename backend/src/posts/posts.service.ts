@@ -1,10 +1,12 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Post } from 'src/schemas/Post.schema';
 import { CreatePostDto } from '../dto/post/CreatePost.dto';
 import { UpdatePostDto } from '../dto/post/UpdatePost.dto';
 import { User } from 'src/schemas/User.schema';
+import { CreateUserDto } from 'src/dto/user/CreateUser.dto';
+import { UsersService } from 'src/users/users.service';
 
 @Injectable()
 export class PostsService {
@@ -17,6 +19,12 @@ export class PostsService {
 
     async createPost(createPostDto: CreatePostDto) {
         const newPost = new this.postModel(createPostDto);
+        const user = await this.userModel.findById(createPostDto.userId);
+        if (!user) {
+            throw new BadRequestException('User not found');
+        }
+        user.postedJobs.push(newPost._id);
+        await user.save();
         return newPost.save();
     }
 

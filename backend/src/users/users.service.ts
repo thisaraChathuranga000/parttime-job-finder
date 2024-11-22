@@ -3,44 +3,53 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User } from 'src/schemas/User.schema';
 import { CreateUserDto } from '../dto/user/CreateUser.dto';
-import { UpdateUserDto } from '../dto/user/UpdateUser.dto';
 import { AuthService } from 'src/auth/auth.service';
+import { UpdateUserDto } from 'src/dto/user/UpdateUser.dto';
+const bcrypt = require('bcrypt');
 
 interface Query{ email:string }
 
 @Injectable()
 export class UsersService {
-    logger: Logger;
     constructor(
         @InjectModel(User.name) private userModel: Model<User>,
         @Inject(forwardRef(() => AuthService))
         private AuthService: AuthService
-    ) { 
-        this.logger = new Logger(UsersService.name); 
-    }
-
-    // async createUser(createUserDto:CreateUserDto): Promise<User> {
-    //     const createdUser = new this.userModel(createUserDto);
-    //     return createdUser.save();
-    // }
+    ) {}
 
     async createUser(user: CreateUserDto): Promise<CreateUserDto> {
-        this.logger.log('Creating user.');
-       
-        const hashedPassword = await this.AuthService.getHashedPassword(
-          user.password
-        );
+        const hashedPassword = await this.getHashedPassword(user.password);
         user.password = hashedPassword;
         const newUser = new this.userModel(user);
         return newUser.save();
     }
 
-    // async findByEmail(email:Query): Promise<User>{
-    //     return await this.userModel.find(email).select('+password');
-    //     //return await this.userModel.findOne(email);
-    // }
-
     async findOne(email: Query): Promise<CreateUserDto> {
-        return await this.userModel.findOne(email).select('+password');
+        return await this.userModel.findOne(email).select('-password');
+    }
+
+    async getHashedPassword(password: string): Promise<any> {
+        return new Promise((resolve, reject) => {
+            bcrypt.hash(password, 10, (err:any, hash:any) => {
+                if (err) {reject(err)}
+                resolve(hash);
+            })
+        })
+    }
+
+    async findOneUser(id:string){
+        const user = await this.userModel.findById(id).select('-password');
+        if(!user){
+            throw new NotFoundException('user not found');
+        }
+        return user;
+    }
+
+    async updateUser(id:string, updateUserDto:UpdateUserDto){
+        const user = await this.userModel.findById(id);
+        if(!user){
+            throw new NotFoundException('user not found');
+        }
+        return this.userModel.findByIdAndUpdate(id, updateUserDto, { new: true });
     }
 }

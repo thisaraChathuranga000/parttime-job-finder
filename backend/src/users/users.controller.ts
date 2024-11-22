@@ -9,15 +9,16 @@ import {
   Put,
   Res,
   UploadedFile,
+  UseGuards,
   UseInterceptors,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
-import mongoose from 'mongoose';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CreateUserDto } from '../dto/user/CreateUser.dto';
-import { UpdateUserDto } from '../dto/user/UpdateUser.dto';
+import { AuthGuard } from 'src/auth/auth.guards'
+import { UpdateUserDto } from 'src/dto/user/UpdateUser.dto';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
@@ -30,13 +31,24 @@ export class UsersController {
   @UsePipes(new ValidationPipe())
   @UseInterceptors(FileInterceptor('file'))
   createUser(@Body() createUserDto: CreateUserDto, @UploadedFile() file){
-    if (file) {createUserDto.imgUrl =  process.env.APPLICATION_DOMAIN + "users/" + file.filename}
+    if (file) {createUserDto.imgUrl =  process.env.APPLICATION_DOMAIN + process.env.APPLICATION_PORT +  "/users/img/" + file.filename}
     return this.usersService.createUser(createUserDto);
   }
 
-  @Get(':imgPath')
-    seeUploadedFile(@Param('imgPath') image, @Res() res){
-      return res.sendFile(image, {root: 'uploads/users'});
+  @Get('img/:imgPath')
+  seeUploadedFile(@Param('imgPath') image, @Res() res){
+    return res.sendFile(image, {root: 'uploads/users'});
+  }
+
+  @UseGuards(AuthGuard)
+  @Get(':id')
+  getUserById(@Param('id') id:string){
+    return this.usersService.findOneUser(id);
+  }
+
+  @Put(':id')
+  async updateUserById(@Param('id') id:string, @Body() updateUserDto:UpdateUserDto){
+    return this.usersService.updateUser(id, updateUserDto);
   }
 
 }

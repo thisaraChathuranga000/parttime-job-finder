@@ -1,6 +1,9 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -9,7 +12,7 @@ async function bootstrap() {
     forbidNonWhitelisted: true, // Throws an error if extra properties are present
     transform: true, // Automatically transforms payloads to the specified DTO class
   }));
-  await app.listen(5000);
+  await app.listen(process.env.APPLICATION_PORT);
 }
 bootstrap();
  

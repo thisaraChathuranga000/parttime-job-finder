@@ -5,6 +5,9 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Post, PostSchema } from 'src/schemas/Post.schema';
 import { User, UserSchema } from 'src/schemas/User.schema';
 import { MulterModule } from '@nestjs/platform-express';
+import { UsersService } from 'src/users/users.service';
+import { UsersController } from 'src/users/users.controller';
+import { AuthService } from 'src/auth/auth.service';
 
 @Module({
   imports:[MongooseModule.forFeature([
