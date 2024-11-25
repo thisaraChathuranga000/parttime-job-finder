@@ -10,17 +10,17 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 @Module({
-    imports: [
-        JwtModule.register({
-            global: true,
-            secret: process.env.JWT_SECRET,
-            signOptions: { expiresIn: '3600s'},
-        }),
-        forwardRef(() => UsersModule),
-        PassportModule
-    ],
-    controllers: [AuthController],
-    providers: [AuthService, LocalStrategy],
-    exports: [AuthService],
+  imports: [
+    JwtModule.register({
+      global: true,
+      secret: process.env.JWT_SECRET,
+      signOptions: { expiresIn: '3600s' },
+    }),
+    forwardRef(() => UsersModule),
+    PassportModule,
+  ],
+  controllers: [AuthController],
+  providers: [AuthService, LocalStrategy],
+  exports: [AuthService],
 })
 export class AuthModule {}

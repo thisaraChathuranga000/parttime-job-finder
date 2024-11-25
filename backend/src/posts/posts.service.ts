@@ -1,98 +1,119 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { Post } from 'src/schemas/Post.schema';
 import { CreatePostDto } from '../dto/post/CreatePost.dto';
-import { UpdatePostDto } from '../dto/post/UpdatePost.dto';
 import { User } from 'src/schemas/User.schema';
-import { CreateUserDto } from 'src/dto/user/CreateUser.dto';
-import { UsersService } from 'src/users/users.service';
 
 @Injectable()
 export class PostsService {
-    constructor(
-        @InjectModel(Post.name) 
-        private readonly postModel: Model<Post>,
-        @InjectModel(User.name) 
-        private userModel: Model<User>, 
-    ) {}
+  constructor(
+    @InjectModel(Post.name)
+    private readonly postModel: Model<Post>,
+    @InjectModel(User.name)
+    private userModel: Model<User>,
+  ) {}
 
-    async createPost(createPostDto: CreatePostDto) {
-        const newPost = new this.postModel(createPostDto);
-        const user = await this.userModel.findById(createPostDto.userId);
-        if (!user) {
-            throw new BadRequestException('User not found');
-        }
-        user.postedJobs.push(newPost._id);
-        await user.save();
-        return newPost.save();
+  async createPost(createPostDto: CreatePostDto) {
+    const newPost = new this.postModel(createPostDto);
+    const user = await this.userModel.findById(createPostDto.userId);
+    if (!user) {
+      throw new BadRequestException('User not found');
+    }
+    user.postedJobs.push(newPost._id);
+    await user.save();
+    return newPost.save();
+  }
+
+  async findAll() {
+    try {
+      const posts = await this.postModel
+        .find()
+        .populate({
+          path: 'userId',
+          model: this.userModel,
+          select: 'name',
+        })
+        .exec();
+      return posts;
+    } catch (error) {
+      throw new Error('Failed to retrieve Posts');
+    }
+  }
+
+  async findOnePost(id: string) {
+    const post = await this.postModel
+      .findById(id)
+      .populate({
+        path: 'userId',
+        model: this.userModel,
+        select: 'name',
+      })
+      .exec();
+    if (!post) {
+      throw new NotFoundException('Post Not found');
+    }
+    return post;
+  }
+
+  async deletePost(id: string) {
+    try {
+      const deletedPost = await this.postModel.findByIdAndDelete(id);
+      if (!deletedPost) {
+        throw new Error('Post Not found');
+      }
+      return deletedPost;
+    } catch (error) {
+      throw new Error('Unable to delete Post');
+    }
+  }
+
+  async applyToPost(
+    userId: Types.ObjectId,
+    postId: Types.ObjectId,
+  ): Promise<{ message: string }> {
+    const post = await this.postModel.findById(postId);
+    if (!post) {
+      throw new NotFoundException('Post not found');
     }
 
-    async findAll() {
-        try {
-            const posts = await this.postModel
-                .find()
-                .populate({
-                    path: 'userId',
-                    model: this.userModel,
-                    select: 'name'
-                })
-                .exec();
-            return posts;
-        } catch (error) {
-            throw new Error('Failed to retrieve Posts');
-        }
+    const user = await this.userModel.findById(userId);
+    if (!user) {
+      throw new NotFoundException('User not found');
     }
 
-    async findAllPosts(id: string) {
-        try {
-            const posts = await this.postModel
-                .find({ userId: id })
-                .populate({
-                    path: 'userId',
-                    model: this.userModel,
-                    select: 'name'
-                })
-                .exec();
-            return posts;
-        } catch (error) {
-            throw new Error('Failed to retrieve Posts');
-        }
+    // Add post to user's appliedJobs if not already present
+    if (!user.appliedJobs.includes(postId)) {
+      user.appliedJobs.push(postId);
+      await user.save();
     }
 
-
-    async findOnePost(id:string){
-        const post = await this.postModel
-            .findById(id)
-            .populate({
-                path: 'userId',
-                model: this.userModel, 
-                select: 'name'
-            })
-            .exec();
-        if(!post){
-            throw new NotFoundException("Post Not found");
-        }
-        return post;
+    // Add user to post's applicants if not already present
+    if (!post.applicants.includes(userId)) {
+      post.applicants.push(userId);
+      await post.save();
     }
 
-    async updatePost(id: string, updatePostDto: UpdatePostDto) {
-        const post = await this.postModel.findById(id);
-        if (!post) {
-            throw new NotFoundException('Post not found');
-        }
-        return this.postModel.findByIdAndUpdate(id, updatePostDto, { new: true });
+    return { message: 'Successfully applied to the post' };
+  }
+
+  async getApplicants(postId: string): Promise<any> {
+    const post = await this.postModel
+      .findById(postId)
+      .populate('applicants', '-password');
+
+    if (!post) {
+      throw new NotFoundException('Post not found');
     }
 
-    async deletePost(id: string){
-        try{
-            const deletedPost = await this.postModel.findByIdAndDelete(id);
-            if(!deletedPost){
-                throw new Error("Post Not found")
-            }
-            return deletedPost;
-        } catch (error){
-            throw new Error("Unable to delete Post")
-        }
-    }
+    return {
+      postId: post._id,
+      title: post.title,
+      applicants: post.applicants,
+    };
+  }
 }

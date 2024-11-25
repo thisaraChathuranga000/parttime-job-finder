@@ -29,4 +29,3 @@ export class Post extends Document {
 }
 
 export const PostSchema = SchemaFactory.createForClass(Post);
-

@@ -4,10 +4,9 @@ import { CreateUserDto } from 'src/dto/user/CreateUser.dto';
 
 @Controller('auth')
 export class AuthController {
-
-    @UseGuards(AuthGuard('local'))
-    @Post('login')
-    async login(@Request() req): Promise<CreateUserDto> {
-        return req.user;
-    }
+  @UseGuards(AuthGuard('local'))
+  @Post('login')
+  async login(@Request() req): Promise<CreateUserDto> {
+    return req.user;
+  }
 }

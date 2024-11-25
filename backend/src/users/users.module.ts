@@ -7,15 +7,17 @@ import { MulterModule } from '@nestjs/platform-express';
 import { AuthService } from 'src/auth/auth.service';
 
 @Module({
-    imports:[MongooseModule.forFeature([
-        {
-            name: User.name,
-            schema: UserSchema,
-        }
+  imports: [
+    MongooseModule.forFeature([
+      {
+        name: User.name,
+        schema: UserSchema,
+      },
     ]),
-    MulterModule.register({dest: './uploads/users',})],
-    providers: [UsersService, AuthService],
-    controllers: [UsersController],
-    exports: [UsersService]
+    MulterModule.register({ dest: './uploads/users' }),
+  ],
+  providers: [UsersService, AuthService],
+  controllers: [UsersController],
+  exports: [UsersService],
 })
 export class UsersModule {}
