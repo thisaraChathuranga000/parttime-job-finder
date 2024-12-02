@@ -39,6 +39,7 @@ export class UsersController {
     return this.usersService.createUser(createUserDto);
   }
 
+  @UseGuards(AuthGuard)
   @Get('img/:imgPath')
   seeUploadedFile(@Param('imgPath') image, @Res() res) {
     return res.sendFile(image, { root: 'uploads/users' });
@@ -50,6 +51,7 @@ export class UsersController {
     return this.usersService.findOneUser(id);
   }
 
+  @UseGuards(AuthGuard)
   @Put(':id')
   async updateUserById(
     @Param('id') id: string,
@@ -58,11 +60,13 @@ export class UsersController {
     return this.usersService.updateUser(id, updateUserDto);
   }
 
+  @UseGuards(AuthGuard)
   @Get(':userId/postedJobs')
   async getPostedJobs(@Param('userId') userId: string) {
     return await this.usersService.getPostedJobs(userId);
   }
 
+  @UseGuards(AuthGuard)
   @Get(':userId/appliedJobs')
   async getAppliedJobs(@Param('userId') userId: string) {
     return await this.usersService.getAppliedJobs(userId);
