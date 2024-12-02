@@ -4,7 +4,7 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
 import Box from "@mui/material/Box";
-import axios from "axios";
+// import axios from "axios";
 import ModelLayout from "../../../layouts/ModelLayout";
 
 function PostJob(props) {
@@ -42,10 +42,10 @@ function PostJob(props) {
       formDataToSend.append("file", selectedImage);
     }
 
-    axios
-      .post("http://localhost:5000/posts", formDataToSend)
-      .then((response) => console.log(response.data))
-      .catch((error) => console.error(error));
+    // axios
+    //   .post("http://localhost:5000/posts", formDataToSend)
+    //   .then((response) => console.log(response.data))
+    //   .catch((error) => console.error(error));
   };
 
   const handleClose = () => setOpen(false);

@@ -4,14 +4,29 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import FormBox from "../../layouts/FormBox";
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from "../../services/usersService";
+import { setEmail, setPassword } from "../../redux/slices/authSlice";
+import { useNavigate } from "react-router-dom";
+import { APP_ROUTES } from "../../constants";
+import { useEffect } from "react";
 
 function LoginBox() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const email = useSelector((state) => state.auth.email);
+  const password = useSelector((state) => state.auth.password);
+  const accessToken = useSelector((state) => state.auth.accessToken);
 
-  const handleChange = async (e) => {
+  useEffect(() => {
+    if (accessToken) {
+      navigate(APP_ROUTES.HOME);
+    }
+  }, [accessToken, navigate]);
+
+  const handleLogin =   (e) => {
     e.preventDefault();
-    console.log("Login");
+    dispatch(login({ email, password }));
   };
 
   return (
@@ -21,7 +36,7 @@ function LoginBox() {
           LogIn
         </Typography>
 
-        <form onSubmit={handleChange}>
+        <form onSubmit={handleLogin}>
           <TextField
             label="Email"
             type="email"
@@ -29,7 +44,7 @@ function LoginBox() {
             fullWidth
             margin="normal"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => dispatch(setEmail(e.target.value))}
             required
           />
           <TextField
@@ -40,7 +55,7 @@ function LoginBox() {
             margin="normal"
             required
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => dispatch(setPassword(e.target.value))}
           />
           <Button
             sx={{ marginTop: 1 }}

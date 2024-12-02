@@ -1,5 +1,5 @@
 export const APP_ROUTES = {
-  HOME: "",
+  HOME: "/",
   INTERNAL_PROFILE: "/internal-profile",
   EXTERNAL_PROFILE: "/external-profile",
   LOGIN: "/login",

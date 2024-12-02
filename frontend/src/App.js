@@ -8,7 +8,6 @@ import SignUp from "./pages/SignUp/SignUp";
 import { Route, Routes } from "react-router-dom";
 import Footer from "./components/common/Footer";
 import { APP_ROUTES } from "./constants";
-
 function App() {
   return (
     <div className="App">
