@@ -2,29 +2,48 @@ import React from "react";
 import Typography from "@mui/material/Typography";
 import JobSectionLayout from "../../../layouts/JobSectionLayout";
 import JobCardLayout from "../../../layouts/JobCardLayout";
+import { useSelector, useDispatch } from "react-redux";
+import { postedJobs } from "../../../redux/action/postedJobsAction";
 
 function PostedJobs({ onclick }) {
+  const dispatch = useDispatch();
+  const jobs = useSelector((state) => state.postedJobs.postedJobs);
+  const userDetails = useSelector((state) => state.authUser.userDetails);
+  const isLoading = useSelector((state) => state.postedJobs.isLoading);
+  const hasError = useSelector((state) => state.postedJobs.hasError);
+
+  const handleExpand = () => {
+    dispatch(postedJobs(userDetails._id))
+  }
+
+
   return (
-    <JobSectionLayout accordionTitle={"Posted Jobs"} count={10}>
-      <JobCardLayout
-        actionName={"Remove Job"}
-        img={"/assets/jobs/stockCounting.jpg"}
-      >
-        <Typography variant="h5" sx={{ textAlign: "left" }}>
-          Title
-        </Typography>
-        <Typography variant="subtitle2" sx={{ textAlign: "left" }}>
-          Posted Time
-        </Typography>
-        <Typography
-          variant="subtitle2"
-          color="#1976d2"
-          sx={{ textAlign: "left", marginBottom: 2 }}
-          onClick={onclick}
+    <JobSectionLayout accordionTitle={"Posted Jobs"} count={10} onExpand={handleExpand}>
+      {jobs.map((i, index) => (
+        <JobCardLayout
+          actionName={"Remove Job"}
+          img={i.img}
+          key={index}
         >
-          Applicants 10
-        </Typography>
-      </JobCardLayout>
+          <Typography variant="h5" sx={{ textAlign: "left" }}>
+            {i.title}
+          </Typography>
+          <Typography variant="subtitle2" sx={{ textAlign: "left" }}>
+            {i.startingTime}
+          </Typography>
+          <Typography
+            variant="subtitle2"
+            color="#1976d2"
+            sx={{ textAlign: "left", marginBottom: 2 }}
+            onClick={onclick}
+          >
+            Applicants 10
+          </Typography>
+        </JobCardLayout>
+      ))}
+
+      {isLoading && <p>Loading...</p>}
+      {hasError && <p>Failed to fetch posted jobs</p>}
     </JobSectionLayout>
   );
 }

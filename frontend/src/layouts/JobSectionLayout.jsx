@@ -6,7 +6,12 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 
-function JobSectionLayout({ children, accordionTitle, count }) {
+function JobSectionLayout({ children, accordionTitle, count, onExpand }) {
+  const handleAccordionChange = (expanded) => {
+    if (expanded && onExpand) {
+      onExpand();
+    }
+  };
   return (
     <Box
       sx={{
@@ -19,6 +24,7 @@ function JobSectionLayout({ children, accordionTitle, count }) {
     >
       <Accordion
         sx={{ boxShadow: "0 4px 8px #4A4A4A", border: "1px solid #0069c4" }}
+        onChange={handleAccordionChange} 
       >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
