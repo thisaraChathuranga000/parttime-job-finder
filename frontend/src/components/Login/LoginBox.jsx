@@ -5,8 +5,8 @@ import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import FormBox from "../../layouts/FormBox";
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from "../../services/usersService";
-import { setEmail, setPassword } from "../../redux/slices/authSlice";
+import { login } from "../../redux/action/authUsersAction";
+import { setEmail, setPassword } from "../../redux/slices/authUserSlice";
 import { useNavigate } from "react-router-dom";
 import { APP_ROUTES } from "../../constants";
 import { useEffect } from "react";
@@ -14,9 +14,11 @@ import { useEffect } from "react";
 function LoginBox() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const email = useSelector((state) => state.auth.email);
-  const password = useSelector((state) => state.auth.password);
-  const accessToken = useSelector((state) => state.auth.accessToken);
+  const email = useSelector((state) => state.authUser.email);
+  const password = useSelector((state) => state.authUser.password);
+  const accessToken = useSelector((state) => state.authUser.accessToken);
+  const hasError = useSelector((state) => state.authUser.hasError);
+  const isLoading = useSelector((state) => state.authUser.isLoading);
 
   useEffect(() => {
     if (accessToken) {
@@ -27,6 +29,7 @@ function LoginBox() {
   const handleLogin =   (e) => {
     e.preventDefault();
     dispatch(login({ email, password }));
+    
   };
 
   return (
@@ -66,6 +69,14 @@ function LoginBox() {
           >
             Login
           </Button>
+
+          {isLoading && (
+            <p>Signing...</p>
+          )}
+
+          {hasError && (
+            <p>Incorrect userName or password</p>
+          )}
         </form>
 
         <Typography variant="body2" align="center" style={{ marginTop: 10 }}>

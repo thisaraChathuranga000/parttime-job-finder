@@ -39,7 +39,6 @@ export class UsersController {
     return this.usersService.createUser(createUserDto);
   }
 
-  @UseGuards(AuthGuard)
   @Get('img/:imgPath')
   seeUploadedFile(@Param('imgPath') image, @Res() res) {
     return res.sendFile(image, { root: 'uploads/users' });

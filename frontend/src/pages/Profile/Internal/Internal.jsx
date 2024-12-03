@@ -2,6 +2,7 @@ import React from "react";
 import ProfileBar from "../../../components/Profile/Internal/ProfileBar";
 import ProfileDashBoard from "../../../components/Profile/Internal/ProfileDashBoard";
 import Grid from "@mui/material/Grid";
+import { useSelector } from "react-redux";
 
 function Internal() {
   return (

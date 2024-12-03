@@ -9,7 +9,7 @@ const setAuthToken = (token) => {
     apiClient.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   } else {
     delete apiClient.defaults.headers.common["Authorization"];
-    return
+    return;
   }
 };
 

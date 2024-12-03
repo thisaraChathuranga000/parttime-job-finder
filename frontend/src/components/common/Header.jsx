@@ -12,10 +12,9 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { useState } from "react";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { APP_ROUTES } from "../../constants";
 
 function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -26,7 +25,7 @@ function Header() {
   };
 
   const handleClick = () => {
-    navigate("");
+    navigate(APP_ROUTES.HOME);
   };
   return (
     <div>
@@ -48,7 +47,7 @@ function Header() {
               aria-label="open drawer"
               sx={{ mr: 1 }}
               component={Link}
-              to="/"
+              to={APP_ROUTES.HOME}
             >
               <PanoramaFishEyeIcon />
             </IconButton>
@@ -65,7 +64,7 @@ function Header() {
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
               <Stack spacing={2} direction="row" marginTop={1} marginRight={1}>
-                <Link to="/login">
+                <Link to={APP_ROUTES.LOGIN}>
                   <Button
                     variant="contained"
                     sx={{
@@ -79,7 +78,7 @@ function Header() {
                   </Button>
                 </Link>
 
-                <Link to="/sign-up">
+                <Link to={APP_ROUTES.SIGNUP}>
                   <Button
                     variant="outlined"
                     sx={{
@@ -92,37 +91,6 @@ function Header() {
                     Sign Up
                   </Button>
                 </Link>
-
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  open={Boolean(anchorEl)}
-                  onClose={handleClose}
-                >
-                  <MenuItem
-                    component={Link}
-                    to="/SignUpStudent"
-                    onClick={handleClose}
-                  >
-                    UnderGraduate
-                  </MenuItem>
-                  <MenuItem
-                    component={Link}
-                    to="/SignUpOrg"
-                    onClick={handleClose}
-                  >
-                    Employer
-                  </MenuItem>
-                </Menu>
               </Stack>
 
               <IconButton
@@ -146,7 +114,7 @@ function Header() {
                   <NotificationsIcon />
                 </Badge>
               </IconButton>
-              <Link to="/internal-profile">
+              <Link to={APP_ROUTES.INTERNAL_PROFILE}>
                 <IconButton
                   size="large"
                   edge="end"
