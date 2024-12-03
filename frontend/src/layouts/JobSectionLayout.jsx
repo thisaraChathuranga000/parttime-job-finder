@@ -24,7 +24,7 @@ function JobSectionLayout({ children, accordionTitle, count, onExpand }) {
     >
       <Accordion
         sx={{ boxShadow: "0 4px 8px #4A4A4A", border: "1px solid #0069c4" }}
-        onChange={handleAccordionChange} 
+        onChange={handleAccordionChange}
       >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}

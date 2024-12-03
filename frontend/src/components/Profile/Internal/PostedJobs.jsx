@@ -13,18 +13,17 @@ function PostedJobs({ onclick }) {
   const hasError = useSelector((state) => state.postedJobs.hasError);
 
   const handleExpand = () => {
-    dispatch(postedJobs(userDetails._id))
-  }
-
+    dispatch(postedJobs(userDetails._id));
+  };
 
   return (
-    <JobSectionLayout accordionTitle={"Posted Jobs"} count={10} onExpand={handleExpand}>
+    <JobSectionLayout
+      accordionTitle={"Posted Jobs"}
+      count={10}
+      onExpand={handleExpand}
+    >
       {jobs.map((i, index) => (
-        <JobCardLayout
-          actionName={"Remove Job"}
-          img={i.img}
-          key={index}
-        >
+        <JobCardLayout actionName={"Remove Job"} img={i.img} key={index}>
           <Typography variant="h5" sx={{ textAlign: "left" }}>
             {i.title}
           </Typography>

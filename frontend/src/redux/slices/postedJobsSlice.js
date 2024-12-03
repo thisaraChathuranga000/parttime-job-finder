@@ -2,17 +2,17 @@ import { createSlice } from "@reduxjs/toolkit";
 import { postedJobs } from "../action/postedJobsAction";
 
 const initialState = {
-    isLoading:false,
-    hasError:false,
-    postedJobs:[]
+  isLoading: false,
+  hasError: false,
+  postedJobs: [],
 };
 
 export const postedJobsSlice = createSlice({
-    name: "postedJobs",
-    initialState,
-    reducers: {},
-    extraReducers: (builder) => {
-      builder
+  name: "postedJobs",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
       .addCase(postedJobs.pending, (state) => {
         state.isLoading = true;
         state.hasError = false;
@@ -25,10 +25,9 @@ export const postedJobsSlice = createSlice({
       .addCase(postedJobs.rejected, (state) => {
         state.isLoading = false;
         state.hasError = true;
-      })
-    },
-  });
+      });
+  },
+});
 
-  export const {} = postedJobsSlice.actions;
-  export default postedJobsSlice.reducer;
-  
+export const {} = postedJobsSlice.actions;
+export default postedJobsSlice.reducer;
