@@ -22,6 +22,9 @@ function PostedJobs({ onclick }) {
       count={10}
       onExpand={handleExpand}
     >
+      {isLoading && <p>Loading...</p>}
+      {hasError && <p>Failed to fetch posted jobs</p>}
+      
       {jobs.map((i, index) => (
         <JobCardLayout actionName={"Remove Job"} img={i.img} key={index}>
           <Typography variant="h5" sx={{ textAlign: "left" }}>
@@ -40,9 +43,6 @@ function PostedJobs({ onclick }) {
           </Typography>
         </JobCardLayout>
       ))}
-
-      {isLoading && <p>Loading...</p>}
-      {hasError && <p>Failed to fetch posted jobs</p>}
     </JobSectionLayout>
   );
 }
