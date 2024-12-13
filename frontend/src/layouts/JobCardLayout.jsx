@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 
-function JobCardLayout({ children, img, actionName }) {
+function JobCardLayout({ children, img, actionName, action }) {
   return (
     <Box
       sx={{
@@ -33,6 +33,7 @@ function JobCardLayout({ children, img, actionName }) {
           variant="contained"
           sx={{ textTransform: "none" }}
           color="error"
+          onClick={action}
         >
           {actionName}
         </Button>

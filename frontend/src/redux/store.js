@@ -4,6 +4,7 @@ import storage from "redux-persist/lib/storage";
 import { persistStore, persistReducer } from "redux-persist";
 import postedJobsReducer from "./slices/postedJobsSlice";
 import appliedJobsReducer from "./slices/appliedJobsSlice";
+import JobPostsReducer from "./slices/jobPostsSlice"
 
 const persistConfig = {
   key: "root",
@@ -13,7 +14,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
   authUser: authUserReducer,
   postedJobs: postedJobsReducer,
-  appliedJobs: appliedJobsReducer
+  appliedJobs: appliedJobsReducer,
+  jobPosts: JobPostsReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
