@@ -29,7 +29,15 @@ export const getPostById = createAsyncThunk(
 export const deletePostById = createAsyncThunk(
   "deletePostById",
   async (id) => {
-      const response = await apiClient.delete(`/posts/${id}`);
+      const response = await apiClient.delete(`/posts/post/${id}`);
+      return response.data;
+  }
+);
+
+export const getAllPost = createAsyncThunk(
+  "getAllPost",
+  async () => {
+      const response = await apiClient.get(`/posts/all`);
       return response.data;
   }
 );

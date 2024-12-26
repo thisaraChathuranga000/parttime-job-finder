@@ -10,7 +10,7 @@ import AllApplicant from "../../Profile/Internal/AllApplicant";
 import { ApplicantData } from "../../../dummyApplicantData";
 
 function Post({ post }) {
-  const { company, title, description, payment, image, date, location } = post;
+  const { company, title, description, payment, img, date, location, userId, startingTime } = post;
   const [openApplyPost, setOpenApplyPost] = useState(false);
   const [openSeeMore, setOpenSeeMore] = useState(false);
   const [isVisibleApplicants, setIsVisibleApplicants] = useState(false);
@@ -47,7 +47,7 @@ function Post({ post }) {
         <Grid container lg={12} justifyContent="center" p={2}>
           <img
             // src={`http://localhost:5000/posts/uploads/${img}`}
-            src={image}
+            src={img}
             alt={title}
             style={{ width: "250px", height: "200px" }}
           />
@@ -66,10 +66,10 @@ function Post({ post }) {
             {title}
           </Typography>
           <Typography variant="subtitle1" component="h4">
-            {company}
+            {userId.name}
           </Typography>
           <Typography variant="subtitle1" component="h4">
-            {date}
+            {startingTime}
           </Typography>
           <Typography variant="subtitle1" color="text.secondary" component="h4">
             Payment : {payment} LKR
@@ -94,7 +94,7 @@ function Post({ post }) {
             {title}
           </Typography>
           <Typography variant="subtitle1" component="h4">
-            {company}
+            {userId.name}
           </Typography>
           <Typography
             variant="subtitle1"
@@ -110,7 +110,7 @@ function Post({ post }) {
             component="div"
             align="left"
           >
-            {date}
+            {startingTime}
           </Typography>
           <Typography
             variant="subtitle1"

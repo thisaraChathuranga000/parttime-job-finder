@@ -7,6 +7,7 @@ import {
   HttpStatus,
   Param,
   Post,
+  Put,
   Res,
   UploadedFile,
   UseInterceptors,
@@ -54,7 +55,7 @@ export class PostsController {
     return this.postService.findOnePost(id);
   }
 
-  @Delete(':id')
+  @Delete('post/:id')
   async deletePostById(@Param('id') id: string) {
     return await this.postService.deletePost(id);
   }
@@ -79,4 +80,20 @@ export class PostsController {
   async getApplicants(@Param('postId') postId: string) {
     return await this.postService.getApplicants(postId);
   }
+
+  @Put('select-applicant')
+  async updateApplicant(@Body() body: { userId: Types.ObjectId; postId: Types.ObjectId }){
+    const { userId, postId } = body;
+    return this.postService.selectAppliedUser(userId, postId);
+  }
+
+  @Delete('remove-applicant')
+  async deleteApplicant(@Body() body: { userId: string; postId: string }){
+    const { userId, postId } = body;
+    return this.postService.removeApplicant(userId,postId);
+  }
+
+  
+
+  
 }

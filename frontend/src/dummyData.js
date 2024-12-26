@@ -19,7 +19,7 @@ export const postData = [
     date: "05/06/2023 - 8.30 AM",
     payment: 5000,
     description:
-      "The purpose of the ACT Residual Assessment is for UMHB to obtain data on enrolled, admitted, or applicant students who were unable to take the ACT Assessment on a national test date. The ACT Residual Assessment is given by appointment only on scheduled dates.",
+      "The purpose of the ACT Residual Assessment is for GMBH to obtain data on enrolled, admitted, or applicant students who were unable to take the ACT Assessment on a national test date. The ACT Residual Assessment is given by appointment only on scheduled dates.",
   },
   {
     id: 3,

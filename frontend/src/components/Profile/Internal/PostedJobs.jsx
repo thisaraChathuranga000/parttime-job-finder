@@ -4,7 +4,10 @@ import JobSectionLayout from "../../../layouts/JobSectionLayout";
 import JobCardLayout from "../../../layouts/JobCardLayout";
 import { useSelector, useDispatch } from "react-redux";
 import { postedJobs } from "../../../redux/action/postedJobsAction";
-import { getPostById, deletePostById } from "../../../redux/action/jobPostsAction";
+import {
+  getPostById,
+  deletePostById,
+} from "../../../redux/action/jobPostsAction";
 import ModelLayout from "../../../layouts/ModelLayout";
 import { CardContent } from "@mui/material";
 
@@ -15,6 +18,7 @@ function PostedJobs({ onclick }) {
   const isLoading = useSelector((state) => state.postedJobs.isLoading);
   const hasError = useSelector((state) => state.postedJobs.hasError);
   const selectedJob = useSelector((state) => state.jobPosts.selectedJob);
+  const applicantData = useSelector((state) => state.applicants.applicantData);
 
   const [openJob, setOpenJob] = useState(false);
 
@@ -33,7 +37,7 @@ function PostedJobs({ onclick }) {
 
   const handleDelete = (id) => {
     dispatch(deletePostById(id));
-  }
+  };
 
   return (
     <div>
@@ -42,24 +46,46 @@ function PostedJobs({ onclick }) {
         count={10}
         onExpand={handleExpand}
       >
-        {isLoading && <p>Loading...</p>}
-        {hasError && <p>Failed to fetch posted jobs</p>}
+        {/* {isLoading && <p>Loading...</p>}
+        {hasError && <p>Failed to fetch posted jobs</p>} */}
 
         {jobs.map((i, index) => (
-          <JobCardLayout actionName={"Remove Job"} img={i.img} key={index} action={() => {handleDelete(i._id)}}>
+          <JobCardLayout
+            actionName={"Remove Job"}
+            img={i.img}
+            key={index}
+            action={() => {
+              handleDelete(i._id);
+            }}
+          >
             <Typography variant="h5" sx={{ textAlign: "left" }}>
               {i.title}
             </Typography>
             <Typography variant="subtitle2" sx={{ textAlign: "left" }}>
-              {i.startingTime}
+              <span>Created at: </span>
+              <br></br>
+              {i.startingTime &&
+                (() => {
+                  const startingTime = new Date(i.startingTime);
+                  const options = {
+                    hour: "numeric",
+                    minute: "numeric",
+                    second: "numeric",
+                    hour12: true,
+                  };
+                  return `${startingTime.toLocaleTimeString(
+                    "en-US",
+                    options
+                  )}, ${startingTime.toLocaleDateString("en-US")}`;
+                })()}
             </Typography>
             <Typography
               variant="subtitle2"
               color="#1976d2"
               sx={{ textAlign: "left" }}
-              onClick={onclick}
+              onClick={() => onclick(i._id)}
             >
-              Applicants 10
+              Applicants {applicantData.applicants.length}
             </Typography>
             <Typography
               variant="subtitle1"
@@ -81,7 +107,7 @@ function PostedJobs({ onclick }) {
             {selectedJob.title}
           </Typography>
           <Typography variant="subtitle1" component="h4">
-            {selectedJob.userId.name}
+            {userDetails.name}
           </Typography>
           <Typography
             variant="subtitle1"
@@ -103,10 +129,31 @@ function PostedJobs({ onclick }) {
             variant="subtitle1"
             color="text.secondary"
             component="div"
-            marginBottom={-1}
             align="left"
           >
             Payment: {selectedJob.payment}
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            color="text.secondary"
+            component="div"
+            marginBottom={-1}
+            align="left"
+          >
+            Starting time:
+            {selectedJob.startingTime &&
+              (() => {
+                const startingTime = new Date(selectedJob.startingTime);
+                const options = {
+                  hour: "numeric",
+                  minute: "numeric",
+                  hour12: true,
+                };
+                return `${startingTime.toLocaleTimeString(
+                  "en-US",
+                  options
+                )}, ${startingTime.toLocaleDateString("en-US")}`;
+              })()}
           </Typography>
           <Typography
             variant="subtitle1"

@@ -6,14 +6,19 @@ import AllApplicant from "./AllApplicant";
 import AppliedJobs from "./AppliedJobs";
 import PostedJobs from "./PostedJobs";
 import ModelLayout from "../../../layouts/ModelLayout";
+import { useSelector, useDispatch } from "react-redux";
+import { getApplicants } from "../../../redux/action/applicantsAction";
 
 function ProfileDashBoard() {
+  const dispatch = useDispatch();
   const [isPostJobVisible, setPostJobVisible] = useState(false);
   const [isAllJobVisible, setAllJobVisible] = useState(false);
   const [isVisibleApplicants, setIsVisibleApplicants] = useState(false);
+  const applicantData = useSelector((state) => state.applicants.applicantData);
 
-  const handleApplicants = () => {
+  const handleApplicants = (postId) => {
     setIsVisibleApplicants(true);
+    dispatch(getApplicants(postId));
   };
   const closeApplicants = () => {
     setIsVisibleApplicants(false);
@@ -37,7 +42,7 @@ function ProfileDashBoard() {
       <PostedJobs onclick={handleApplicants} />
 
       <ModelLayout open={isVisibleApplicants} onclose={closeApplicants}>
-        {ApplicantData.map((applicant) => (
+        {applicantData.applicants.map((applicant) => (
           <AllApplicant key={applicant.id} applicant={applicant} />
         ))}
       </ModelLayout>

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { postJob, getPostById } from "../action/jobPostsAction";
+import { postJob, getPostById, getAllPost } from "../action/jobPostsAction";
 
 const initialState = {
   isLoading: false,
@@ -44,6 +44,7 @@ export const JobPostsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      //Post Job
       .addCase(postJob.pending, (state) => {
         state.isLoading = true;
         state.hasError = false;
@@ -58,6 +59,7 @@ export const JobPostsSlice = createSlice({
         state.hasError = true;
       })
 
+      //Get Post By Id
       .addCase(getPostById.pending, (state) => {
         state.isLoading = true;
         state.hasError = false;
@@ -68,6 +70,21 @@ export const JobPostsSlice = createSlice({
         state.selectedJob = action.payload;
       })
       .addCase(getPostById.rejected, (state) => {
+        state.isLoading = false;
+        state.hasError = true;
+      })
+
+      //Get all Posts
+      .addCase(getAllPost.pending, (state) => {
+        state.isLoading = true;
+        state.hasError = false;
+      })
+      .addCase(getAllPost.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.hasError = false;
+        state.jobs = action.payload;
+      })
+      .addCase(getAllPost.rejected, (state) => {
         state.isLoading = false;
         state.hasError = true;
       });

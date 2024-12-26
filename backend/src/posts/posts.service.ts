@@ -63,6 +63,7 @@ export class PostsService {
   async deletePost(id: string) {
     try {
       const deletedPost = await this.postModel.findByIdAndDelete(id);
+      
       if (!deletedPost) {
         throw new Error('Post Not found');
       }
@@ -86,15 +87,21 @@ export class PostsService {
       throw new NotFoundException('User not found');
     }
 
-    // Add post to user's appliedJobs if not already present
     if (!user.appliedJobs.includes(postId)) {
       user.appliedJobs.push(postId);
       await user.save();
     }
 
-    // Add user to post's applicants if not already present
-    if (!post.applicants.includes(userId)) {
-      post.applicants.push(userId);
+    const isAlreadyApplicant = post.applicants.some(
+      (applicant) => applicant.userId.toString() === userId.toString(),
+    );
+
+    if (isAlreadyApplicant) {
+      throw new BadRequestException('You have already applied to this post');
+    }
+
+    if (!isAlreadyApplicant) {
+      post.applicants.push({ userId: userId, selected: false , userImage:user.imgUrl, userName:user.name});
       await post.save();
     }
 
@@ -102,9 +109,10 @@ export class PostsService {
   }
 
   async getApplicants(postId: string): Promise<any> {
-    const post = await this.postModel
-      .findById(postId)
-      .populate('applicants', '-password');
+    const post = await this.postModel.findById(postId).populate({
+      path: 'applicants',
+      select: '-password',
+    });
 
     if (!post) {
       throw new NotFoundException('Post not found');
@@ -116,4 +124,55 @@ export class PostsService {
       applicants: post.applicants,
     };
   }
+
+  async selectAppliedUser(
+    userId: Types.ObjectId,
+    postId: Types.ObjectId,
+  ): Promise<any> {
+    const post = await this.postModel.findById(postId);
+
+    if (!post) {
+      throw new NotFoundException('Post not found');
+    }
+
+    const applicant = post.applicants.find(
+      (applicant) => applicant.userId.toString() === userId.toString(),
+    );
+
+    if (!applicant) {
+      throw new NotFoundException('Applicant not found for this post');
+    }
+
+    applicant.selected = true;
+    const selectedApplicant = post.applicants.find((i) => i.userId === userId);
+    await post.save();
+    return selectedApplicant;
+  }
+
+  async removeApplicant(
+    userId: string,
+    postId: string,
+  ): Promise<{ message: string }> {
+    const post = await this.postModel.findById(postId);
+    if (!post) {
+      throw new NotFoundException('Post not found');
+    }
+
+    const applicantExists = post.applicants.find(
+      (applicant) => applicant.userId.toString() === userId.toString(),
+    );
+    
+    if (!applicantExists) {
+      throw new BadRequestException('Applicant not found for this post');
+    }
+
+    await this.postModel.updateOne(
+      { _id: postId },
+      { $pull: { applicants: { userId: userId } } },
+    );
+
+    return { message: 'Applicant record deleted successfully' };
+  }
+
+ 
 }

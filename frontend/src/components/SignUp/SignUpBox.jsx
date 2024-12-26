@@ -4,21 +4,51 @@ import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import FormBox from "../../layouts/FormBox";
+import { createNewUser } from "../../redux/action/authUsersAction";
+import { useDispatch, useSelector } from "react-redux";
+import { setCreateUser, setClearCreatedUser } from "../../redux/slices/authUserSlice";
+import { useNavigate } from "react-router-dom";
 
 function SignUpBox() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const createUser = useSelector((state) => state.authUser.createUser);
   const [step, setStep] = useState(1);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const nextStep = () => setStep((prevStep) => prevStep + 1);
+  const [initialPassword, setInitialPassword] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("Signing Up");
+  const nextStep = () => {
+    if (password !== initialPassword) {
+      alert("Passwords do not match");
+    } else {
+      dispatch(setCreateUser({ key: "password", value: password }));
+      setStep((prevStep) => prevStep + 1);
+    }
   };
 
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
+  const previousStep = () => setStep((prevStep) => prevStep - 1);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    dispatch(setCreateUser({ key: name, value }));
+  };
+
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0];
     if (file) {
-      setSelectedImage(file);
+      dispatch(setCreateUser({ key: "file", value: file }));
+    }
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      await dispatch(createNewUser(createUser)).unwrap();
+      alert("Sign-up successful! Please log in to continue.");
+      dispatch(setClearCreatedUser());
+      navigate("/login");
+    } catch (error) {
+      console.error("Failed to post job:", error);
     }
   };
 
@@ -37,6 +67,8 @@ function SignUpBox() {
               fullWidth
               margin="normal"
               name="email"
+              value={createUser.email || ""}
+              onChange={handleInputChange}
             />
 
             <TextField
@@ -45,7 +77,9 @@ function SignUpBox() {
               variant="outlined"
               fullWidth
               margin="normal"
-              name="password"
+              name="initialPassword"
+              value={initialPassword}
+              onChange={(e) => setInitialPassword(e.target.value)}
             />
 
             <TextField
@@ -54,9 +88,12 @@ function SignUpBox() {
               variant="outlined"
               fullWidth
               margin="normal"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
+
             <Button
-              type="submit"
               variant="contained"
               color="primary"
               fullWidth
@@ -80,6 +117,8 @@ function SignUpBox() {
               fullWidth
               margin="normal"
               name="name"
+              value={createUser.name || ""}
+              onChange={handleInputChange}
             />
 
             <TextField
@@ -88,6 +127,8 @@ function SignUpBox() {
               fullWidth
               margin="normal"
               name="contact"
+              value={createUser.contact || ""}
+              onChange={handleInputChange}
             />
 
             <TextField
@@ -96,6 +137,8 @@ function SignUpBox() {
               fullWidth
               margin="normal"
               name="address"
+              value={createUser.address || ""}
+              onChange={handleInputChange}
             />
 
             <Typography variant="subtitle2" gutterBottom sx={{ color: "gray" }}>
@@ -107,10 +150,20 @@ function SignUpBox() {
               margin="normal"
               type="file"
               inputProps={{ accept: "image/*" }}
-              onChange={handleImageChange}
               name="file"
               variant="outlined"
+              onChange={handleFileUpload}
             />
+
+            <Button
+              variant="contained"
+              color="primary"
+              fullWidth
+              onClick={previousStep}
+              sx={{ marginBottom: 1 }}
+            >
+              Back
+            </Button>
 
             <Button
               type="submit"

@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -70,4 +71,6 @@ export class UsersController {
   async getAppliedJobs(@Param('userId') userId: string) {
     return await this.usersService.getAppliedJobs(userId);
   }
+
+   
 }

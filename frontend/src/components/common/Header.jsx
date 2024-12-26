@@ -15,10 +15,13 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { APP_ROUTES } from "../../constants";
+import { setClearCreatedUser } from "../../redux/slices/authUserSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -27,6 +30,12 @@ function Header() {
   const handleClick = () => {
     navigate(APP_ROUTES.HOME);
   };
+
+  const handleSignUpClick = () => {
+    dispatch(setClearCreatedUser());
+    navigate(APP_ROUTES.SIGNUP);
+
+  }
   return (
     <div>
       <Box sx={{ flexGrow: 1 }} pb={8}>
@@ -77,8 +86,7 @@ function Header() {
                     Log in
                   </Button>
                 </Link>
-
-                <Link to={APP_ROUTES.SIGNUP}>
+                
                   <Button
                     variant="outlined"
                     sx={{
@@ -87,10 +95,10 @@ function Header() {
                       width: "100px",
                       height: "30px",
                     }}
+                    onClick={handleSignUpClick}
                   >
                     Sign Up
                   </Button>
-                </Link>
               </Stack>
 
               <IconButton

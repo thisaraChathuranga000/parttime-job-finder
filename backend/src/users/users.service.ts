@@ -85,4 +85,6 @@ export class UsersService {
       appliedJobs: user.appliedJobs,
     };
   }
+
+  
 }

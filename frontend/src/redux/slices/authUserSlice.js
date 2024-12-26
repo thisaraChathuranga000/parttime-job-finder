@@ -9,6 +9,14 @@ const initialState = {
   accessToken: null,
   isLoading: false,
   hasError: false,
+  createUser: {
+    file: null,
+    email: "",
+    password: "",
+    name: "",
+    contact: "",
+    address: ""
+  },
 };
 
 export const authUserSlice = createSlice({
@@ -30,6 +38,21 @@ export const authUserSlice = createSlice({
     },
     updateUserDetails: (state, action) => {
       state.userDetails = { ...state.userDetails, ...action.payload };
+    },
+    setCreateUser: (state, action) => {
+      const { key, value } = action.payload;
+      if (!state.createUser) {
+        state.createUser = {};
+      }
+      state.createUser[key] = value;
+    },
+    setClearCreatedUser: (state) => {
+      state.createUser.file = null;
+      state.createUser.email = "";
+      state.createUser.password = "";
+      state.createUser.contact = "";
+      state.createUser.address = "";
+      state.createUser.name = "";
     }
   },
   extraReducers: (builder) => {
@@ -73,6 +96,8 @@ export const {
   logout,
   setEmail,
   setPassword,
-  updateUserDetails
+  updateUserDetails,
+  setCreateUser,
+  setClearCreatedUser
 } = authUserSlice.actions;
 export default authUserSlice.reducer;
